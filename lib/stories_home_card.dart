@@ -51,9 +51,9 @@ class StoriesHomeCard extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Container(
-                      width: 250,
+                      width: 200,
                       child: Text(
-                        'A Oktoberfest de Blumenau é um festival de tradições germânicas que ocorre na cidade',
+                        'A Oktoberfest de Blumenau é um festival de tradições germânicas',
                         overflow: TextOverflow.clip,
                       ),
                     )

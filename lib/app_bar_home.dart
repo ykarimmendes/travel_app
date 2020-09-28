@@ -28,7 +28,7 @@ class AppBarWidget extends StatelessWidget {
                 Icons.location_on,
                 color: Colors.black,
               ),
-              hintText: "Text",
+              hintText: "Busca",
               enabledBorder: outlineInputBorder,
               focusedBorder: outlineInputBorder,
             ),
