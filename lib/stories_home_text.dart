@@ -5,11 +5,11 @@ class StoriesHomeText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.only(top: 30, bottom: 15),
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: 20,
               child: Text(
                 "Stories for Blumenau",

@@ -8,29 +8,29 @@ class TopHomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 200, //altura do card principal
       child: ListView.builder(
         itemCount: 3,
+        scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return SizedBox(
-            height: 200,
-            width: 200,
+            //height: 50,
+            width: 250, //largura do card
             child: Card(
               elevation: 10,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Center(
-                    child: SizedBox(
-                      height: 100,
-                      width: 500,
+                    child: Container(
+                      padding: EdgeInsets.only(top:5),
+                      height: 150,
+                      width: 225,
                       child: Card(
                         elevation: 5,
                         child: Image.asset(
                           "assets/museu_da_agua.jpeg",
                           fit: BoxFit.cover,
-                          height: 50,
-                          width: 50,
                         ),
                       ),
                     ),
