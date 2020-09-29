@@ -19,51 +19,47 @@ class RestaurantsHomeCards extends StatelessWidget {
               elevation: 3,
               child: Row(
                 children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  Expanded(
+                    flex: 4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 2,
+                          child: Image.asset(
+                            "assets/restaurante1.jpg",
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          clipBehavior: Clip.antiAlias,
                         ),
-                        elevation: 2,
-                        child: Image.asset(
-                          "assets/restaurante1.jpg",
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Column(
-
-                    
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 15.0, bottom: 10),
-                        child: Text(
-                          "Hangoo Restaurante",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16),
+                  Expanded(
+                    flex: 6,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15.0, bottom: 10),
+                          child: Text(
+                            "Hangoo Restaurante",
+                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 150,
-                        child: ListTile(
-
+                        ListTile(
                           dense: true,
                           title: Text("Buffet Livre"),
-                          subtitle: Text(
-                              "Churrasco, Pizzas, Sobremesas, Sorvetes"),
+                          subtitle: Text("Churrasco, Pizzas, Sobremesas, Sorvetes"),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
