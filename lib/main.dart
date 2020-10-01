@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/app_bar_home.dart';
-import 'package:travelapp/restaurants/restaurants_home_cards.dart';
 
-import 'package:travelapp/stories_home_card.dart';
-import 'package:travelapp/stories_home_text.dart';
-import 'package:travelapp/attractions/top_home_card.dart';
 
-import 'filter_home.dart';
+import 'home/app_bar_home.dart';
+import 'home/attractions/top_home_card.dart';
+import 'home/filter_home.dart';
+import 'home/restaurants/restaurants_home_cards.dart';
+import 'home/stories/stories_home_card.dart';
+import 'home/stories/stories_home_text.dart';
+import 'top_attractions/main_attraction.dart';
 import 'widgets/home_text.dart';
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      //home: MyHomePage(),
+      home: MainAttractions()
     );
   }
 }
@@ -50,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             HomeText("Bares e Restaurantes"),
             RestaurantsHomeCards(),
           ],
-        )),
+        ),),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

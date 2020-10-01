@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/widgets/custom_buttom.dart';
+
+import '../widgets/custom_buttom.dart';
 
 class FilterHome extends StatelessWidget {
   var filters = ['Praças', 'Restaurantes', 'Parques', 'Bares', 'Família'];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelapp/attractions/attraction.dart';
+
+import 'attraction.dart';
 
 class TopHomeCard extends StatelessWidget {
   const TopHomeCard({
@@ -50,7 +51,7 @@ class TopHomeCard extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 2, left: 10),
+                    padding: EdgeInsets.only(top: 2, left: 10, right: 8),
                     child: Text(
                         atts[index].description),
                   ),

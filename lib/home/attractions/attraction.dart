@@ -15,7 +15,7 @@ class Attraction {
     List<Attraction> atts = new List<Attraction>();
     Attraction att = new Attraction.mock(
         1,
-        "Museu da Água",
+        "Museu da Água ",
         "Museu dedicado à história do tratamento da água na cidade",
         "assets/museu_da_agua.jpeg",
         "Top #1 Museus");
