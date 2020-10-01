@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             HomeText("Bares e Restaurantes"),
             RestaurantsHomeCards(),
           ],
-        ),),
+        )),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
