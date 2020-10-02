@@ -10,67 +10,75 @@ class MainAttractions extends StatefulWidget {
 class _MainAttractionsState extends State<MainAttractions> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Image.asset(
-              "assets/museu_da_agua.jpeg",
-              fit: BoxFit.cover,
+    return Scaffold(
+      backgroundColor: Colors.redAccent,
+        body: CustomScrollView(
+          shrinkWrap: true,
+          slivers: <Widget>[
+      SliverAppBar(
+        backgroundColor: Colors.white,
+        //automaticallyImplyLeading: true,
+        //forceElevated: true,
+        //floating: false,
+        flexibleSpace:  Image.asset(
+            "assets/museu_da_agua.jpeg",
+            fit: BoxFit.cover,
+          ),
+        expandedHeight: MediaQuery.of(context).size.height / 3,
+      ),
+      SliverToBoxAdapter(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.white
+          ),
+          width:  MediaQuery.of(context).size.width,
+
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                LocationName(),
+                NameLocation(),
+                StatsLocation(),
+                DescriptionLocation(),
+                PhotosTextLocation(),
+                PhotosLocation(),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                 LocationName(),
-                 NameLocation(),
-                 StatsLocation(),
-                 DescriptionLocation(),
-                 PhotosTextLocation(),
-                 PhotosLocation(),
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
-    );
+    ],),);
   }
 }
 
 class PhotosLocation extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height:  MediaQuery.of(context).size.height/2,
-      child: GridView.builder(
-        padding: EdgeInsets.only(top: 12),
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: 6,
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 4,
-            child: Image.asset(
-              "assets/museu/m$index.jpg",
-              fit: BoxFit.cover,
-            ),
-          );
-        },
-      ),
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: EdgeInsets.only(top: 12),
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 7,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 4,
+          child: Image.asset(
+            "assets/museu/m$index.jpg",
+            fit: BoxFit.cover,
+          ),
+        );
+      },
     );
   }
 }
 
 class PhotosTextLocation extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -88,17 +96,14 @@ class PhotosTextLocation extends StatelessWidget {
 class DescriptionLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(top: 15.0),
-      child: Column(
-        children: <Widget>[
-          CText(
-            text:
-                "O Museu da Água de Blumenau é um museu localizado no bairro da Boa Vista, na cidade de Blumenau. O espaço é mantido pela SEMAE (Serviço Autônomo Municipal de água e esgoto) e está localizado justamente na primeira estação de tratamento de água da cidade, inaugurada em 1940 e transformada em local de visitação em 1999.[1] No local, o visitante pode conhecer os processos de coleta e purificação da água, além de ter acesso a um acervo com peças, equipamentos e documentos que recontam um pouco da história do abastecimento de água na cidade.[2] No Réveillon, o local também é usado como ponto para a queima de fogos na cidade.[3]",
-            height: 1.4,
-            maxLines: 5,
-          )
-        ],
+      child: CText(
+        text:
+            "O Museu da Água de Blumenau é um museu localizado no bairro da Boa Vista, na cidade de Blumenau. O espaço é mantido pela SEMAE (Serviço Autônomo Municipal de água e esgoto) e está localizado justamente na primeira estação de tratamento de água da cidade, inaugurada em 1940 e transformada em local de visitação em 1999.[1] No local, o visitante pode conhecer os processos de coleta e purificação da água, além de ter acesso a um acervo com peças, equipamentos e documentos que recontam um pouco da história do abastecimento de água na cidade.[2] No Réveillon, o local também é usado como ponto para a queima de fogos na cidade.[3]",
+        height: 1.4,
+        maxLines: 5,
       ),
     );
   }
