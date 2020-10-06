@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/widgets/custom_text.dart';
 
+import 'main_attraction_with_border.dart';
+
 class MainAttractions extends StatefulWidget {
   @override
   _MainAttractionsState createState() => _MainAttractionsState();
@@ -11,69 +13,42 @@ class _MainAttractionsState extends State<MainAttractions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.redAccent,
-        body: CustomScrollView(
-          shrinkWrap: true,
-          slivers: <Widget>[
-      SliverAppBar(
-        backgroundColor: Colors.white,
-        //automaticallyImplyLeading: true,
-        //forceElevated: true,
-        //floating: false,
-        flexibleSpace:  Image.asset(
-            "assets/museu_da_agua.jpeg",
-            fit: BoxFit.cover,
+      body: CustomScrollView(
+        shrinkWrap: true,
+        slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            //automaticallyImplyLeading: true,
+            //forceElevated: true,
+            //floating: false,
+            flexibleSpace: Image.asset(
+              "assets/museu_da_agua.jpeg",
+              fit: BoxFit.cover,
+            ),
+            expandedHeight: MediaQuery.of(context).size.height / 3,
           ),
-        expandedHeight: MediaQuery.of(context).size.height / 3,
-      ),
-      SliverToBoxAdapter(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.white
-          ),
-          width:  MediaQuery.of(context).size.width,
-
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                LocationName(),
-                NameLocation(),
-                StatsLocation(),
-                DescriptionLocation(),
-                PhotosTextLocation(),
-                PhotosLocation(),
-              ],
+          SliverToBoxAdapter(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    LocationName(),
+                    NameLocation(),
+                    StatsLocation(),
+                    DescriptionLocation(),
+                    PhotosTextLocation(),
+                    PhotosLocation(),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
-    ],),);
-  }
-}
-
-class PhotosLocation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.only(top: 12),
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 7,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemBuilder: (context, index) {
-        return Card(
-          elevation: 4,
-          child: Image.asset(
-            "assets/museu/m$index.jpg",
-            fit: BoxFit.cover,
-          ),
-        );
-      },
     );
   }
 }
@@ -162,6 +137,28 @@ class LocationName extends StatelessWidget {
           fontSize: 15,
         ),
       ],
+    );
+  }
+}
+class PhotosLocation extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: EdgeInsets.only(top: 12),
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 7,
+      gridDelegate:
+      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 4,
+          child: Image.asset(
+            "assets/museu/m$index.jpg",
+            fit: BoxFit.cover,
+          ),
+        );
+      },
     );
   }
 }

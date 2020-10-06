@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelapp/photo_attractions/main_photo_attraction.dart';
 
 
 import 'home/app_bar_home.dart';
@@ -8,7 +9,6 @@ import 'home/filter_home.dart';
 import 'home/restaurants/restaurants_home_cards.dart';
 import 'home/stories/stories_home_card.dart';
 import 'home/stories/stories_home_text.dart';
-import 'top_attractions/main_attraction.dart';
 import 'widgets/home_text.dart';
 
 void main() {
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: MyHomePage(),
-      home: MainAttractions()
+      home: MyHomePage(),
+      //home: MainPhotoAttraction()
     );
   }
 }

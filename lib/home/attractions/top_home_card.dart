@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelapp/top_attractions/main_attraction.dart';
 
 import 'attraction.dart';
 
@@ -21,51 +22,59 @@ class TopHomeCard extends StatelessWidget {
         itemCount: atts.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return SizedBox(
-            width: LARGURA_CARD_IMAGEM,
-            child: Card(
-              elevation: 5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 5),
-                      height: 150,
-                      width: 260,
-                      child: Card(
-                        elevation: 5,
-                        child: Image.asset(
-                          atts[index].photoLink,
-                          fit: BoxFit.cover,
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainAttractions()),
+              );
+            },
+            child: SizedBox(
+              width: LARGURA_CARD_IMAGEM,
+              child: Card(
+                elevation: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 5),
+                        height: 150,
+                        width: 260,
+                        child: Card(
+                          elevation: 5,
+                          child: Image.asset(
+                            atts[index].photoLink,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 5, left: 10),
-                    child: Text(
-                      atts[index].name,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 2, left: 10, right: 8),
-                    child: Text(
-                        atts[index].description),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 15, left: 10),
-                    child: Text(
-                      atts[index].topDescription,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.w900
+                    Padding(
+                      padding: EdgeInsets.only(top: 5, left: 10),
+                      child: Text(
+                        atts[index].name,
+                        style:
+                            TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(top: 2, left: 10, right: 8),
+                      child: Text(
+                          atts[index].description),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15, left: 10),
+                      child: Text(
+                        atts[index].topDescription,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w900
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
