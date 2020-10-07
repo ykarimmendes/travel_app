@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelapp/photo_attractions/main_photo_attraction.dart';
 import 'package:travelapp/widgets/custom_text.dart';
 
 import 'main_attraction_with_border.dart';
@@ -17,7 +18,7 @@ class _MainAttractionsState extends State<MainAttractions> {
         shrinkWrap: true,
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Colors.white,
+            //backgroundColor: Colors.white,
             //automaticallyImplyLeading: true,
             //forceElevated: true,
             //floating: false,
@@ -151,11 +152,19 @@ class PhotosLocation extends StatelessWidget {
       gridDelegate:
       SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       itemBuilder: (context, index) {
-        return Card(
-          elevation: 4,
-          child: Image.asset(
-            "assets/museu/m$index.jpg",
-            fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MainPhotoAttraction(index)),
+            );
+          },
+          child: Card(
+            elevation: 4,
+            child: Image.asset(
+              "assets/museu/m$index.jpg",
+              fit: BoxFit.cover,
+            ),
           ),
         );
       },
