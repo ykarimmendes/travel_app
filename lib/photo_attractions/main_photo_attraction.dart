@@ -20,28 +20,6 @@ class _MainPhotoAttractionState extends State<MainPhotoAttraction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[
-                Colors.indigo,
-                Colors.blue,
-
-              ],
-            )
-          ),
-        ),
-        title: CText(
-          text: "Museu da Água",
-          color: Colors.white,
-          fontFamily: "LibreBaskerville",
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
       body: Container(
         color: Color.fromRGBO(242, 241, 243, 1),
         child: Column(
@@ -84,7 +62,7 @@ class _MainPhotoAttractionState extends State<MainPhotoAttraction> {
                     //child: Image.asset("assets/avatar_w.jpg"),
                   ),
                 ),
-                title: Text("Ingrid Leonel de Souza"),
+                title: Text("Ingrid Leonel"),
                 subtitle: Row(
                   children: <Widget>[
                     Icon(Icons.star, color: Colors.amber, size: 20),
