@@ -12,11 +12,20 @@ class MainIntelligenceTravel extends StatefulWidget {
 class _MainIntelligenceTravelState extends State<MainIntelligenceTravel> {
   IntelligenceTravel _intelligenceTravel = IntelligenceTravel();
   List<IntelligenceTravel> _ies = List<IntelligenceTravel>();
+  int _totalSelected = 0;
+  double _totalDistance = 0.0;
 
   void _handleTap(int index) {
     setState(() {
       _ies[index].check = !_ies[index].check;
+      _totalSelected = _ies.where((element) => element.check).length;
+
+      if (_ies[index].check) {
+        _totalDistance += _ies[index].distance;
+      } else
+        _totalDistance -= _ies[index].distance;
     });
+
   }
 
   @override
@@ -29,6 +38,7 @@ class _MainIntelligenceTravelState extends State<MainIntelligenceTravel> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
         title: CText(
           text: "Escolha seu roteiro",
@@ -127,14 +137,14 @@ class _MainIntelligenceTravelState extends State<MainIntelligenceTravel> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Text("LUGARES: 3"),
-            title: Text("3 Selecionados"),
+            icon: Text("LUGARES:"),
+            title: Text("$_totalSelected Selecionados"),
           ),
           BottomNavigationBarItem(
             icon: Text("DISTÂNCIA"),
-            title: Text("03.00KM"),
+            title: Text("${_totalDistance.toStringAsFixed(2)} KM"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chevron_right),

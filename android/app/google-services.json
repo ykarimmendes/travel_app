@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "431239408802",
+    "firebase_url": "https://travelapp-a6b01.firebaseio.com",
+    "project_id": "travelapp-a6b01",
+    "storage_bucket": "travelapp-a6b01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431239408802:android:520613d5b2141e2c02bbfb",
+        "android_client_info": {
+          "package_name": "com.yehia.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431239408802-khcnvsc51kvg7vi37gm0m4ghlj7ad7ls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe67kb1BCDis80fXGwglJF-I616jcLdYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431239408802-khcnvsc51kvg7vi37gm0m4ghlj7ad7ls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
