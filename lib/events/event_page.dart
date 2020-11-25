@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/photo_attractions/main_photo_attraction.dart';
+import 'package:travelapp/photo_attractions/photo_attraction_page.dart';
+import 'package:travelapp/util/utils.dart';
+import 'package:travelapp/widgets/back_icon_page.dart';
 import 'package:travelapp/widgets/custom_text.dart';
+import 'package:travelapp/widgets/icons_page.dart';
+import 'package:travelapp/widgets/title_page_text.dart';
+import 'package:travelapp/widgets/topic_text.dart';
 
 class EventPage extends StatefulWidget {
   @override
@@ -12,11 +17,12 @@ class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Util.background,
       body: CustomScrollView(
         shrinkWrap: true,
         slivers: <Widget>[
           SliverAppBar(
-
+            leading: BackIconPage(),
             automaticallyImplyLeading: true,
             forceElevated: true,
             floating: false,
@@ -25,12 +31,10 @@ class _EventPageState extends State<EventPage> {
               "assets/blumenau1.jpg",
               fit: BoxFit.cover,
             ),
-
           ),
           SliverToBoxAdapter(
             child: Container(
               width: MediaQuery.of(context).size.width,
-              color: Color.fromRGBO(242, 241, 243, 0),
               child: Padding(
                 padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
                 child: Column(
@@ -39,7 +43,7 @@ class _EventPageState extends State<EventPage> {
                   children: <Widget>[
                     NameLocation(),
                     DescriptionLocation(),
-                    PhotosTextLocation("Fotos"),
+                    TopicText("Fotos"),
                     PhotosLocation(),
                   ],
                 ),
@@ -52,26 +56,6 @@ class _EventPageState extends State<EventPage> {
   }
 }
 
-class PhotosTextLocation extends StatelessWidget {
-  final String text;
-
-  PhotosTextLocation(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 25),
-      child: CText(
-        text: text,
-        fontWeight: FontWeight.w900,
-        color: Color.fromRGBO(54, 71, 88, 1),
-        fontSize: 17,
-        fontFamily: "LibreBaskerville",
-      ),
-    );
-  }
-}
-
 class DescriptionLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -79,7 +63,7 @@ class DescriptionLocation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        PhotosTextLocation("Informações"),
+        TopicText("Informações"),
         Padding(
           padding: const EdgeInsets.only(top: 10.0),
         ),
@@ -95,7 +79,7 @@ class DescriptionLocation extends StatelessWidget {
           maxLines: 5,
           textAlign: TextAlign.justify,
         ),
-        PhotosTextLocation("Sobre"),
+        TopicText("Sobre"),
         Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.only(top: 10.0),
@@ -126,13 +110,7 @@ class NameLocation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              CText(
-                text: "Oktoberfest 2019",
-                fontSize: 25,
-                fontFamily: "LibreBaskerville",
-                fontWeight: FontWeight.w900,
-                color: Color.fromRGBO(54, 71, 88, 1),
-              ),
+              TitlePageText("Oktoberfest 2019"),
             ],
           ),
         ),
@@ -141,9 +119,9 @@ class NameLocation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              MainAttractionIcons(text: "Favorito", icon: Icons.favorite),
-              MainAttractionIcons(text: "Mapa", icon: Icons.map),
-              MainAttractionIcons(text: "Compartilhar", icon: Icons.share),
+              IconPage(text: "Favorito", icon: Icons.favorite),
+              IconPage(text: "Mapa", icon: Icons.map),
+              IconPage(text: "Compartilhar", icon: Icons.share),
             ],
           ),
         ),
@@ -192,7 +170,7 @@ class PhotosLocation extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainPhotoAttraction(index)),
+                  builder: (context) => PhotoAttractionPage(index)),
             );
           },
           child: Card(
@@ -208,31 +186,4 @@ class PhotosLocation extends StatelessWidget {
   }
 }
 
-class MainAttractionIcons extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  Color color;
 
-  MainAttractionIcons({@required this.text, @required this.icon, this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    if (color == null) color = Colors.grey[500];
-
-    return Column(
-      children: <Widget>[
-        Icon(
-          icon,
-          color: color,
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        CText(
-          text: text,
-          fontSize: 17,
-        ),
-      ],
-    );
-  }
-}

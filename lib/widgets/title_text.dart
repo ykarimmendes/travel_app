@@ -1,25 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/widgets/custom_buttom.dart';
 
-class HomeText extends StatelessWidget {
+class TitleText extends StatelessWidget {
   final String text;
   final bool renderMore;
   final double top;
 
-  HomeText({@required this.text, this.renderMore = true, this.top = 30});
+  TitleText({@required this.text, this.renderMore = true, this.top = 30});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: top, bottom: 10),
+    return Padding(
+      padding: EdgeInsets.only(top: top, bottom: 5),
       child: Row(
         children: <Widget>[
           Expanded(
             child: SizedBox(
-              height: 20,
+              height: 26,
               child: Text(
                 text,
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, fontFamily: "BreeSerif"),
               ),
             ),
           ),

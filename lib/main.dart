@@ -2,15 +2,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/home/events/events_home_card.dart';
+import 'package:travelapp/util/utils.dart';
 
 import 'home/app_bar_home.dart';
 import 'home/filter_home.dart';
 import 'home/main_attractions/top_home_card.dart';
 import 'home/restaurants/restaurants_home_cards.dart';
-import 'intelligence_travel/main_intelligence_travel.dart';
-import 'widgets/home_text.dart';
+import 'intelligence_travel/intelligence_travel_page.dart';
+import 'widgets/title_text.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -39,17 +42,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: AppBarWidget(),
       ),
       body: Container(
-        color: Color.fromRGBO(246, 246, 246, 1),
+        color: Util.background,
         padding: EdgeInsets.only(left: 10, right: 10),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               FilterHome(),
-              HomeText(text: "Eventos de Blumenau"),
+              TitleText(text: "Eventos de Blumenau"),
               EventsHomeCard(),
-              HomeText(text:"Lugares para Conhecer"),
+              TitleText(text:"Lugares para Conhecer"),
               TopHomeCard(),
-              HomeText(text:"Bares e Restaurantes"),
+              TitleText(text:"Bares e Restaurantes"),
               RestaurantsHomeCards(),
             ],
           ),
@@ -85,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_currentIndex == 2){
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainIntelligenceTravel()),
+        MaterialPageRoute(builder: (context) => IntelligenceTravelPage()),
       );
     }
 

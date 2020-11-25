@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelapp/attractions/attractions.dart';
+import 'package:travelapp/attractions/attraction_page.dart';
 
 class CButton extends StatelessWidget {
   final String text;
@@ -26,7 +26,7 @@ class CButton extends StatelessWidget {
         onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Attractions()),
+              MaterialPageRoute(builder: (context) => AttractionPage()),
             );
           },
         child: Text(

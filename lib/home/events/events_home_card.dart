@@ -2,25 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/events/event_page.dart';
+import 'package:travelapp/widgets/card_text.dart';
+import 'package:travelapp/widgets/card_title.dart';
 
-import 'event.dart';
+import '../../events/event.dart';
 
 class EventsHomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp();
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('events').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
         final event = Event.fromSnapshot(snapshot.data.docs.first);
         return GestureDetector(
-            onTap: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EventPage()),
-              );
-            },
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventPage()),
+            );
+          },
           child: Container(
             height: 160,
             child: Card(
@@ -51,24 +52,19 @@ class EventsHomeCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            event.title,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 16),
-                          ),
+                          CardTitle(event.title),
                           SizedBox(height: 8),
                           Text(
-                              event.smallDescription,
+                            event.smallDescription,
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.w500),
+                              color: Colors.red,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                           SizedBox(height: 4),
                           Flexible(
-                            child: Text(
+                            child: CardText(
                               event.description,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: false,
-                              maxLines: 3,
                             ),
                           )
                         ],

@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/top_attractions/main_attraction.dart';
+import 'package:travelapp/top_attractions/attraction_page.dart';
+import 'package:travelapp/widgets/card_text.dart';
+import 'package:travelapp/widgets/card_title.dart';
 
-import 'attraction.dart';
+import '../../attractions/attraction.dart';
 
 class TopHomeCard extends StatelessWidget {
   const TopHomeCard({
@@ -12,7 +14,6 @@ class TopHomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp();
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('attractions').snapshots(),
       builder: (context, snapshot) {
@@ -22,6 +23,7 @@ class TopHomeCard extends StatelessWidget {
     );
   }
 }
+
 Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
   return SizedBox(
     height: 260,
@@ -35,10 +37,10 @@ Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
 Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
   final att = Attraction.fromSnapshot(data);
   return GestureDetector(
-    onTap: (){
+    onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainAttractions()),
+        MaterialPageRoute(builder: (context) => AttractionPage()),
       );
     },
     child: SizedBox(
@@ -64,25 +66,18 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
             ),
             Padding(
               padding: EdgeInsets.only(top: 5, left: 10),
-              child: Text(
-                att.title,
-                style:
-                TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
-              ),
+              child: CardTitle(att.title),
             ),
             Padding(
               padding: EdgeInsets.only(top: 2, left: 10, right: 8),
-              child: Text(
-                  att.resume),
+              child: CardText(att.resume),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, left: 10),
+              padding: EdgeInsets.only(top: 10, left: 10),
               child: Text(
                 "Top #${att.top} Museus",
-                style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.w900
-                ),
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.w900),
               ),
             ),
           ],
@@ -90,5 +85,4 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
       ),
     ),
   );
-
 }

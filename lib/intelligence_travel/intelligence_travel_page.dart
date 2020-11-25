@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/widgets/custom_text.dart';
 
-import 'IntelligenceTravel.dart';
+import 'intelligence_travel.dart';
 
-class MainIntelligenceTravel extends StatefulWidget {
+class IntelligenceTravelPage extends StatefulWidget {
   @override
-  _MainIntelligenceTravelState createState() => _MainIntelligenceTravelState();
+  _IntelligenceTravelPageState createState() => _IntelligenceTravelPageState();
 }
 
-class _MainIntelligenceTravelState extends State<MainIntelligenceTravel> {
+class _IntelligenceTravelPageState extends State<IntelligenceTravelPage> {
   IntelligenceTravel _intelligenceTravel = IntelligenceTravel();
   List<IntelligenceTravel> _ies = List<IntelligenceTravel>();
   int _totalSelected = 0;

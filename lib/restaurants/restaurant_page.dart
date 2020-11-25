@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/photo_attractions/main_photo_attraction.dart';
+import 'package:travelapp/photo_attractions/photo_attraction_page.dart';
 import 'package:travelapp/social_media/social_media.dart';
+import 'package:travelapp/util/utils.dart';
+import 'package:travelapp/widgets/back_icon_page.dart';
 import 'package:travelapp/widgets/custom_text.dart';
+import 'package:travelapp/widgets/title_page_text.dart';
+import 'package:travelapp/widgets/topic_text.dart';
 
 class RestaurantPage extends StatefulWidget {
   @override
@@ -13,11 +17,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Util.background,
       body: CustomScrollView(
         shrinkWrap: true,
         slivers: <Widget>[
           SliverAppBar(
-
+            leading: BackIconPage(),
             automaticallyImplyLeading: true,
             forceElevated: true,
             floating: false,
@@ -26,7 +31,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
               "assets/restaurante1.jpg",
               fit: BoxFit.cover,
             ),
-
           ),
           SliverToBoxAdapter(
             child: Container(
@@ -80,7 +84,7 @@ class DescriptionLocation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        PhotosTextLocation("Sobre"),
+        TopicText("Sobre"),
         Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.only(top: 10.0),
@@ -92,16 +96,15 @@ class DescriptionLocation extends StatelessWidget {
             textAlign: TextAlign.justify,
           ),
         ),
-
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: SocialMedia(),
         ),
-
       ],
     );
   }
 }
+
 class NameLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -116,13 +119,7 @@ class NameLocation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              CText(
-                text: "Hangoo Pizzas e Buffet",
-                fontSize: 25,
-                fontFamily: "LibreBaskerville",
-                fontWeight: FontWeight.w900,
-                color: Color.fromRGBO(54, 71, 88, 1),
-              ),
+              TitlePageText("Hangoo Pizzas e Buffet"),
             ],
           ),
         ),
@@ -130,7 +127,6 @@ class NameLocation extends StatelessWidget {
           text: "R. Alberto Stein, 165-249 - Velha",
           height: 1.8,
           maxLines: 5,
-
           textAlign: TextAlign.justify,
         ),
         CText(
@@ -151,7 +147,6 @@ class NameLocation extends StatelessWidget {
             ],
           ),
         ),
-
       ],
     );
   }
@@ -197,7 +192,7 @@ class PhotosLocation extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainPhotoAttraction(index)),
+                  builder: (context) => PhotoAttractionPage(index)),
             );
           },
           child: Card(

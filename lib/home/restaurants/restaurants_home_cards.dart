@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/home/restaurants/restaurant.dart';
+import 'file:///C:/Users/karim.yehia/AndroidStudioProjects/travel_app/lib/restaurants/restaurant.dart';
 import 'package:travelapp/restaurants/restaurant_page.dart';
+import 'package:travelapp/widgets/card_title.dart';
 
 class RestaurantsHomeCards extends StatelessWidget {
   const RestaurantsHomeCards({
@@ -72,16 +73,13 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                   padding: const EdgeInsets.only(
                     left: 15.0,
                   ),
-                  child: Text(
-                    restaurant.title,
-                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
-                  ),
+                  child: CardTitle(restaurant.title)
                 ),
                 ListTile(
                   isThreeLine: true,
                   dense: true,
-                  title: Text(restaurant.type),
-                  subtitle: Text(restaurant.sub.join(' , ')),
+                  title: Text(restaurant.type, style: TextStyle(fontSize: 15, fontFamily: "BreeSerif"),),
+                  subtitle: Text(restaurant.sub.join(' , '), style: TextStyle(fontSize: 14),),
                 ),
               ],
             ),

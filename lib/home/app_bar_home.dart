@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:travelapp/filter/filter_page.dart';
+import 'package:travelapp/util/utils.dart';
 
 class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Util.background,
       flexibleSpace: GestureDetector(
         onTap: (){
           Navigator.push(

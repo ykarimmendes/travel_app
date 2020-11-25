@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/home/main_attractions/top_home_card.dart';
-import 'package:travelapp/top_attractions/main_attraction.dart';
-import 'package:travelapp/widgets/home_text.dart';
+import 'package:travelapp/top_attractions/attraction_page.dart';
+import 'package:travelapp/widgets/title_text.dart';
 
-class Attractions extends StatefulWidget {
+class AttractionPage extends StatefulWidget {
   @override
-  _AttractionsState createState() => _AttractionsState();
+  _AttractionPageState createState() => _AttractionPageState();
 }
 
-class _AttractionsState extends State<Attractions> {
+class _AttractionPageState extends State<AttractionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,7 @@ class _AttractionsState extends State<Attractions> {
                       onTap: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MainAttractions()),
+                          MaterialPageRoute(builder: (context) => AttractionPage()),
                         );
                       },
                       child: Card(

@@ -2,20 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/widgets/custom_text.dart';
 
-class MainPhotoAttraction extends StatefulWidget {
+class PhotoAttractionPage extends StatefulWidget {
   final int _photoId;
 
-  MainPhotoAttraction(this._photoId);
+  PhotoAttractionPage(this._photoId);
 
   @override
-  _MainPhotoAttractionState createState() =>
-      _MainPhotoAttractionState(_photoId);
+  _PhotoAttractionPageState createState() =>
+      _PhotoAttractionPageState(_photoId);
 }
 
-class _MainPhotoAttractionState extends State<MainPhotoAttraction> {
+class _PhotoAttractionPageState extends State<PhotoAttractionPage> {
   final int _photoId;
 
-  _MainPhotoAttractionState(this._photoId);
+  _PhotoAttractionPageState(this._photoId);
 
   @override
   Widget build(BuildContext context) {

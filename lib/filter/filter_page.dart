@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelapp/widgets/home_text.dart';
+import 'package:travelapp/widgets/title_text.dart';
 
 import 'filter.dart';
 
@@ -68,7 +68,7 @@ class _FilterPageState extends State<FilterPage> {
                   ),
                 ),
               ),
-              HomeText(
+              TitleText(
                   text: "Quais Seus Interesses?", renderMore: false, top: 10),
               GridView.builder(
                 shrinkWrap: true,

@@ -70,3 +70,12 @@ flutter:
         - asset: fonts/LibreBaskerville-Regular.ttf
         - asset: fonts/LibreBaskerville-Bold.ttf
           weight: 500
+    - family: Acme
+      fonts:
+        - asset: fonts/Acme-Regular.ttf
+    - family: BreeSerif
+      fonts:
+        - asset: fonts/BreeSerif-Regular.ttf
+    - family: CreteRound
+      fonts:
+        - asset: fonts/CreteRound-Regular.ttf

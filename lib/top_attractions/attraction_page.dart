@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/photo_attractions/main_photo_attraction.dart';
+import 'package:travelapp/photo_attractions/photo_attraction_page.dart';
+import 'package:travelapp/widgets/back_icon_page.dart';
 import 'package:travelapp/widgets/custom_text.dart';
+import 'package:travelapp/widgets/icons_page.dart';
+import 'package:travelapp/widgets/title_page_text.dart';
 
-class MainAttractions extends StatefulWidget {
+class AttractionPage extends StatefulWidget {
   @override
-  _MainAttractionsState createState() => _MainAttractionsState();
+  _AttractionPageState createState() => _AttractionPageState();
 }
 
-class _MainAttractionsState extends State<MainAttractions> {
+class _AttractionPageState extends State<AttractionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +19,7 @@ class _MainAttractionsState extends State<MainAttractions> {
         shrinkWrap: true,
         slivers: <Widget>[
           SliverAppBar(
+            leading: BackIconPage(),
             automaticallyImplyLeading: true,
             forceElevated: true,
             floating: false,
@@ -87,6 +91,7 @@ class DescriptionLocation extends StatelessWidget {
             height: 1.4,
             maxLines: 5,
             textAlign: TextAlign.justify,
+
           ),
         ),
       ],
@@ -123,13 +128,7 @@ class NameLocation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              CText(
-                text: "Museu da Água",
-                fontSize: 25,
-                fontFamily: "LibreBaskerville",
-                fontWeight: FontWeight.w900,
-                color: Color.fromRGBO(54, 71, 88, 1),
-              ),
+              TitlePageText("Museu da Água"),
               Padding(
                 padding: const EdgeInsets.only(left: 10,top: 3),
                 child: StatsLocation(),
@@ -141,7 +140,7 @@ class NameLocation extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8.0),
           child: CText(
             text: "R. Lages, s/n - Boa Vista",
-            fontSize: 17,
+            fontSize: 16,
           ),
         ),
         Padding(
@@ -149,9 +148,9 @@ class NameLocation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              MainAttractionIcons(text: "Favorito", icon: Icons.favorite),
-              MainAttractionIcons(text: "Mapa", icon: Icons.map),
-              MainAttractionIcons(text: "Compartilhar", icon: Icons.share),
+              IconPage(text: "Favorito", icon: Icons.favorite),
+              IconPage(text: "Mapa", icon: Icons.map),
+              IconPage(text: "Compartilhar", icon: Icons.share),
             ],
           ),
         ),
@@ -200,7 +199,7 @@ class PhotosLocation extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainPhotoAttraction(index)),
+                  builder: (context) => PhotoAttractionPage(index)),
             );
           },
           child: Card(
@@ -212,35 +211,6 @@ class PhotosLocation extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class MainAttractionIcons extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  Color color;
-
-  MainAttractionIcons({@required this.text, @required this.icon, this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    if (color == null) color = Colors.grey[500];
-
-    return Column(
-      children: <Widget>[
-        Icon(
-          icon,
-          color: color,
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        CText(
-          text: text,
-          fontSize: 17,
-        ),
-      ],
     );
   }
 }

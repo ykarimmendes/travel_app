@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelapp/intelligence_travel/main_intelligence_travel.dart';
+import 'package:travelapp/intelligence_travel/intelligence_travel_page.dart';
 
 class ButtonTravelIntelligence extends StatelessWidget {
   const ButtonTravelIntelligence({
@@ -15,7 +15,7 @@ class ButtonTravelIntelligence extends StatelessWidget {
         print('You tapped on FlatButton');
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainIntelligenceTravel()),
+          MaterialPageRoute(builder: (context) => IntelligenceTravelPage()),
         );
       },
       textColor: Colors.white,
