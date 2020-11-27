@@ -1,21 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/top_attractions/attraction_page.dart';
+import 'package:travelapp/attractions/attraction.dart';
+import 'package:travelapp/attractions/attraction_page.dart';
 import 'package:travelapp/widgets/card_text.dart';
 import 'package:travelapp/widgets/card_title.dart';
 
-import '../../attractions/attraction.dart';
-
 class TopHomeCard extends StatelessWidget {
-  const TopHomeCard({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('attractions').snapshots(),
+      stream:
+          FirebaseFirestore.instance.collectionGroup('attractions').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
         return _buildList(context, snapshot.data.docs);
@@ -39,9 +34,10 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => AttractionPage()),
-      );
+          context,
+          MaterialPageRoute(
+            builder: (context) => AttractionPage(att),
+          ));
     },
     child: SizedBox(
       width: 280.0,

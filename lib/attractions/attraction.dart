@@ -5,7 +5,9 @@ class Attraction {
   String resume;
   int top;
   String image;
-  final DocumentReference reference;
+  String topImage;
+  String about;
+  DocumentReference reference;
 
   Attraction.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
@@ -14,14 +16,7 @@ class Attraction {
       : title = map['title'],
         resume = map['resume'],
         top = map['top'],
-        image = map['image'];
-
-/*
-        3,
-        "Museu de Hábitos e Costumes",
-        "Museu histórico, com objetos como roupas, bolsas e chapéus",
-        "assets/museu.jpeg",
-        "Top #3 Museus");
-        */
-
+        image = map['image'],
+        about = map['about'],
+        topImage = map['top_image'];
 }
