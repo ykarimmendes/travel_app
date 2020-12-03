@@ -1,0 +1,8 @@
+enum SocialMediaEnum {
+  FACEBOOK,
+  INSTAGRAM,
+  WHATSAPP,
+  TWITTER,
+  PERSONAL_PAGE,
+  TIK_TOK
+}

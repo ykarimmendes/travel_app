@@ -53,8 +53,8 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                 width: 260,
                 child: Card(
                   elevation: 5,
-                  child: Image.asset(
-                    "assets/${att.image}",
+                  child: Image.network(
+                    att.photoCoverThumb,
                     fit: BoxFit.cover,
                   ),
                 ),

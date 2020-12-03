@@ -35,7 +35,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => RestaurantPage()),
+        MaterialPageRoute(builder: (context) => RestaurantPage(restaurant)),
       );
     },
     child: Card(
@@ -78,7 +78,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                   isThreeLine: true,
                   dense: true,
                   title: Text(
-                    restaurant.type,
+                    restaurant.category,
                     style: TextStyle(fontSize: 15, fontFamily: "BreeSerif"),
                   ),
                   subtitle: Text(

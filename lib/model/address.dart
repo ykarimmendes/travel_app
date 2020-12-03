@@ -15,5 +15,5 @@ class Address {
       : address = map['address'],
         cep = map['cep'],
         neighborhood = map['neighborhood'],
-        number = map['number'];
+        number = map['address_number'];
 }

@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/attractions/attraction.dart';
 import 'package:travelapp/model/address.dart';
-import 'package:travelapp/photo_attractions/photo_attraction_page.dart';
+import 'package:travelapp/model/collection_enum.dart';
 import 'package:travelapp/widgets/back_icon_page.dart';
 import 'package:travelapp/widgets/custom_text.dart';
 import 'package:travelapp/widgets/icons_page.dart';
+import 'package:travelapp/widgets/photo_page.dart';
 import 'package:travelapp/widgets/title_page_text.dart';
 import 'package:travelapp/widgets/topic_text.dart';
 
@@ -21,12 +23,11 @@ class AttractionPage extends StatefulWidget {
 class _AttractionPageState extends State<AttractionPage> {
   @override
   Widget build(BuildContext context) {
-    Attraction att = widget._att;
+    final Attraction _att = widget._att;
     return StreamBuilder<QuerySnapshot>(
-        stream: steamP(att),
+        stream: getAddress(_att),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return LinearProgressIndicator();
-          //att.getAddress(snapshot.data.docs.first);
           return Scaffold(
             body: CustomScrollView(
               shrinkWrap: true,
@@ -36,8 +37,8 @@ class _AttractionPageState extends State<AttractionPage> {
                   automaticallyImplyLeading: true,
                   forceElevated: true,
                   floating: false,
-                  flexibleSpace: Image.asset(
-                    "assets/museu_da_agua.jpeg",
+                  flexibleSpace: Image.network(
+                    _att.photoCover,
                     fit: BoxFit.cover,
                   ),
                   expandedHeight: MediaQuery.of(context).size.height / 3,
@@ -54,12 +55,13 @@ class _AttractionPageState extends State<AttractionPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           NameLocation(
-                              att,
+                              _att,
                               new Address.fromSnapshot(
                                   snapshot.data.docs.first)),
-                          DescriptionLocation(att),
+                          DescriptionLocation(_att),
                           TopicText("Fotos"),
-                          PhotosLocation(),
+                          PhotosPage(_att.reference.id,
+                              describeEnum(CollectionEnum.attractions)),
                         ],
                       ),
                     ),
@@ -71,8 +73,9 @@ class _AttractionPageState extends State<AttractionPage> {
         });
   }
 
-  steamP(Attraction att) {
-    return FirebaseFirestore.instance
+  getAddress(Attraction att) {
+    final FirebaseFirestore _fb = FirebaseFirestore.instance;
+    return _fb
         .collection('attractions')
         .doc(att.reference.id)
         .collection('address')
@@ -184,43 +187,11 @@ class LocationName extends StatelessWidget {
           size: 15,
         ),
         CText(
-          text: "Museu",
+          text: _att.category,
           color: Colors.grey,
           fontSize: 15,
         ),
       ],
-    );
-  }
-}
-
-class PhotosLocation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.only(top: 12),
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 7,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PhotoAttractionPage(index)),
-            );
-          },
-          child: Card(
-            elevation: 4,
-            child: Image.asset(
-              "assets/museu/m$index.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-        );
-      },
     );
   }
 }

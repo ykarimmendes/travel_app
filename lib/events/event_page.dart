@@ -1,14 +1,21 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/photo_attractions/photo_attraction_page.dart';
+import 'package:travelapp/model/collection_enum.dart';
 import 'package:travelapp/util/utils.dart';
 import 'package:travelapp/widgets/back_icon_page.dart';
 import 'package:travelapp/widgets/custom_text.dart';
 import 'package:travelapp/widgets/icons_page.dart';
+import 'package:travelapp/widgets/photo_page.dart';
 import 'package:travelapp/widgets/title_page_text.dart';
 import 'package:travelapp/widgets/topic_text.dart';
 
+import 'event.dart';
+
 class EventPage extends StatefulWidget {
+  final Event event;
+  EventPage(this.event);
+
   @override
   _EventPageState createState() => _EventPageState();
 }
@@ -16,6 +23,7 @@ class EventPage extends StatefulWidget {
 class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
+    final Event _event = widget.event;
     return Scaffold(
       backgroundColor: Util.background,
       body: CustomScrollView(
@@ -27,8 +35,8 @@ class _EventPageState extends State<EventPage> {
             forceElevated: true,
             floating: false,
             expandedHeight: MediaQuery.of(context).size.height / 3,
-            flexibleSpace: Image.asset(
-              "assets/blumenau1.jpg",
+            flexibleSpace: Image.network(
+              _event.photoCover,
               fit: BoxFit.cover,
             ),
           ),
@@ -41,10 +49,11 @@ class _EventPageState extends State<EventPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    NameLocation(),
-                    DescriptionLocation(),
+                    NameLocation(_event),
+                    DescriptionLocation(_event),
                     TopicText("Fotos"),
-                    PhotosLocation(),
+                    PhotosPage(_event.reference.id,
+                        describeEnum(CollectionEnum.events))
                   ],
                 ),
               ),
@@ -57,6 +66,9 @@ class _EventPageState extends State<EventPage> {
 }
 
 class DescriptionLocation extends StatelessWidget {
+  final Event _event;
+  DescriptionLocation(this._event);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,13 +80,14 @@ class DescriptionLocation extends StatelessWidget {
           padding: const EdgeInsets.only(top: 10.0),
         ),
         CText(
-          text: "2 de Outubro até 23 de Outubro",
+          text: _event.date,
           height: 1.4,
           maxLines: 5,
           textAlign: TextAlign.justify,
         ),
         CText(
-          text: "R. Alberto Stein, 165-249 - Velha",
+          text:
+              "${_event.address.address}, ${_event.address.number} - ${_event.address.neighborhood}",
           height: 1.8,
           maxLines: 5,
           textAlign: TextAlign.justify,
@@ -84,8 +97,7 @@ class DescriptionLocation extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.only(top: 10.0),
           child: CText(
-            text:
-                "A Oktoberfest de Blumenau é um festival de tradições germânicas que ocorre na cidade de Blumenau em Santa Catarina durante o mês de outubro. Ela é uma das celebrações que surgiram no mundo similares à Oktoberfest de Munique, na Alemanha. Em alemão, Oktober significa outubro, e Fest festa ou festival.",
+            text: _event.about,
             height: 1.4,
             maxLines: 5,
             textAlign: TextAlign.justify,
@@ -97,20 +109,23 @@ class DescriptionLocation extends StatelessWidget {
 }
 
 class NameLocation extends StatelessWidget {
+  final Event _event;
+  NameLocation(this._event);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        LocationName(),
+        LocationName(_event.category),
         Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              TitlePageText("Oktoberfest 2019"),
+              TitlePageText(_event.title),
             ],
           ),
         ),
@@ -131,9 +146,9 @@ class NameLocation extends StatelessWidget {
 }
 
 class LocationName extends StatelessWidget {
-  const LocationName({
-    Key key,
-  }) : super(key: key);
+  final String _category;
+
+  LocationName(this._category);
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +160,7 @@ class LocationName extends StatelessWidget {
           size: 15,
         ),
         CText(
-          text: "Festival",
+          text: _category,
           color: Colors.grey,
           fontSize: 15,
         ),
@@ -153,37 +168,3 @@ class LocationName extends StatelessWidget {
     );
   }
 }
-
-class PhotosLocation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.only(top: 12),
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 7,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PhotoAttractionPage(index)),
-            );
-          },
-          child: Card(
-            elevation: 4,
-            child: Image.asset(
-              "assets/museu/m$index.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-

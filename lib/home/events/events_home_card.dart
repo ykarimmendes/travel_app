@@ -17,7 +17,7 @@ class EventsHomeCard extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => EventPage()),
+              MaterialPageRoute(builder: (context) => EventPage(event)),
             );
           },
           child: Container(
@@ -31,21 +31,22 @@ class EventsHomeCard extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(left: 5),
                     height: 140,
+                    width: 125,
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
                       elevation: 5,
                       clipBehavior: Clip.antiAlias,
-                      child: Image.asset(
-                        "assets/blumenau1.jpg",
+                      child: Image.network(
+                        event.photoCoverThumb,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.only(top: 8, left: 10),
+                      padding: EdgeInsets.only(top: 8, left: 6),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,

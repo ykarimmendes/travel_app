@@ -1,14 +1,20 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/photo_attractions/photo_attraction_page.dart';
-import 'package:travelapp/social_media/social_media.dart';
+import 'package:travelapp/model/collection_enum.dart';
+import 'package:travelapp/restaurants/restaurant.dart';
+import 'package:travelapp/social_media/social_media_page.dart';
 import 'package:travelapp/util/utils.dart';
 import 'package:travelapp/widgets/back_icon_page.dart';
 import 'package:travelapp/widgets/custom_text.dart';
+import 'package:travelapp/widgets/photo_page.dart';
 import 'package:travelapp/widgets/title_page_text.dart';
 import 'package:travelapp/widgets/topic_text.dart';
 
 class RestaurantPage extends StatefulWidget {
+  final Restaurant _restaurant;
+  RestaurantPage(this._restaurant);
+
   @override
   _RestaurantPageState createState() => _RestaurantPageState();
 }
@@ -16,6 +22,7 @@ class RestaurantPage extends StatefulWidget {
 class _RestaurantPageState extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
+    final Restaurant _restaurant = widget._restaurant;
     return Scaffold(
       backgroundColor: Util.background,
       body: CustomScrollView(
@@ -42,10 +49,11 @@ class _RestaurantPageState extends State<RestaurantPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    NameLocation(),
-                    DescriptionLocation(),
+                    NameLocation(_restaurant),
+                    DescriptionLocation(_restaurant),
                     PhotosTextLocation("Fotos"),
-                    PhotosLocation(),
+                    PhotosPage(_restaurant.reference.id,
+                        describeEnum(CollectionEnum.business)),
                   ],
                 ),
               ),
@@ -78,6 +86,9 @@ class PhotosTextLocation extends StatelessWidget {
 }
 
 class DescriptionLocation extends StatelessWidget {
+  final Restaurant _restaurant;
+  DescriptionLocation(this._restaurant);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,8 +100,7 @@ class DescriptionLocation extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.only(top: 10.0),
           child: CText(
-            text:
-                "Hangoo Serve diariamente pizzas e buffet de Massas com sobremesas incclusas",
+            text: _restaurant.about,
             height: 1.4,
             maxLines: 5,
             textAlign: TextAlign.justify,
@@ -98,7 +108,7 @@ class DescriptionLocation extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SocialMedia(),
+          child: SocialMediaPage(_restaurant.getAllSocialMedia()),
         ),
       ],
     );
@@ -106,6 +116,9 @@ class DescriptionLocation extends StatelessWidget {
 }
 
 class NameLocation extends StatelessWidget {
+  final Restaurant _restaurant;
+  NameLocation(this._restaurant);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -119,18 +132,19 @@ class NameLocation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              TitlePageText("Hangoo Pizzas e Buffet"),
+              TitlePageText(_restaurant.title),
             ],
           ),
         ),
         CText(
-          text: "R. Alberto Stein, 165-249 - Velha",
+          text:
+              "${_restaurant.address.address}, ${_restaurant.address.number} - ${_restaurant.address.neighborhood}",
           height: 1.8,
           maxLines: 5,
           textAlign: TextAlign.justify,
         ),
         CText(
-          text: "Segunda - Domingo (12:00 às 23:00)",
+          text: _restaurant.openingHour,
           height: 1.4,
           maxLines: 5,
           textAlign: TextAlign.justify,
@@ -172,38 +186,6 @@ class LocationName extends StatelessWidget {
           fontSize: 15,
         ),
       ],
-    );
-  }
-}
-
-class PhotosLocation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.only(top: 12),
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 7,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PhotoAttractionPage(index)),
-            );
-          },
-          child: Card(
-            elevation: 4,
-            child: Image.asset(
-              "assets/museu/m$index.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-        );
-      },
     );
   }
 }

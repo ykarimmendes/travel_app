@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Attraction {
-  String title;
-  String resume;
-  int top;
-  String image;
-  String topImage;
-  String about;
+  final String title;
+  final String resume;
+  final int top;
+  final String topImage;
+  final String about;
+  final String photoCover;
+  final String photoCoverThumb;
+  final String category;
   DocumentReference reference;
 
   Attraction.fromSnapshot(DocumentSnapshot snapshot)
@@ -14,9 +16,11 @@ class Attraction {
 
   Attraction.fromMap(Map<String, dynamic> map, {this.reference})
       : title = map['title'],
+        category = map['category'],
         resume = map['resume'],
         top = map['top'],
-        image = map['image'],
+        photoCover = map['photo_cover'],
+        photoCoverThumb = map['photo_cover_thumb'],
         about = map['about'],
         topImage = map['top_image'];
 }

@@ -1,24 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelapp/model/photo.dart';
 import 'package:travelapp/widgets/custom_text.dart';
 
 class PhotoAttractionPage extends StatefulWidget {
-  final int _photoId;
+  final Photo _photo;
 
-  PhotoAttractionPage(this._photoId);
+  PhotoAttractionPage(this._photo);
 
   @override
-  _PhotoAttractionPageState createState() =>
-      _PhotoAttractionPageState(_photoId);
+  _PhotoAttractionPageState createState() => _PhotoAttractionPageState();
 }
 
 class _PhotoAttractionPageState extends State<PhotoAttractionPage> {
-  final int _photoId;
-
-  _PhotoAttractionPageState(this._photoId);
-
   @override
   Widget build(BuildContext context) {
+    final Photo _photo = widget._photo;
     return Scaffold(
       body: Container(
         color: Color.fromRGBO(242, 241, 243, 1),
@@ -29,15 +26,16 @@ class _PhotoAttractionPageState extends State<PhotoAttractionPage> {
             Expanded(
               flex: 50,
               child: ListView.builder(
-                  padding: EdgeInsets.all(0),
-                  itemCount: 2,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Image.asset(
-                      "assets/museu/m$_photoId.jpg",
-                      fit: BoxFit.contain,
-                    );
-                  },),
+                padding: EdgeInsets.all(0),
+                itemCount: 2,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Image.network(
+                    _photo.url,
+                    fit: BoxFit.contain,
+                  );
+                },
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 15, top: 10),
@@ -85,7 +83,6 @@ class _PhotoAttractionPageState extends State<PhotoAttractionPage> {
                   Text("Facebook"),
                   Text("Facebook"),
                   Text("Facebook")
-
                 ],
               ),
             ),
