@@ -5,7 +5,7 @@ import 'package:travelapp/attractions/attraction_page.dart';
 import 'package:travelapp/widgets/card_text.dart';
 import 'package:travelapp/widgets/card_title.dart';
 
-class TopHomeCard extends StatelessWidget {
+class MainHomeAttractions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(

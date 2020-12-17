@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelapp/attractions/attractions_all.dart';
 import 'package:travelapp/home/events/events_home_card.dart';
 import 'package:travelapp/util/utils.dart';
 
 import 'home/app_bar_home.dart';
 import 'home/filter_home.dart';
-import 'home/main_attractions/top_home_card.dart';
+import 'home/main_attractions/main_home_attractions.dart';
 import 'home/restaurants/restaurants_home_cards.dart';
 import 'intelligence_travel/intelligence_travel_page.dart';
 import 'widgets/title_text.dart';
@@ -48,11 +49,20 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: <Widget>[
               FilterHome(),
-              TitleText(text: "Eventos de Blumenau"),
+              TitleText(
+                text: "Eventos de Blumenau",
+                methodCallBack: AttractionAll(),
+              ),
               EventsHomeCard(),
-              TitleText(text:"Lugares para Conhecer"),
-              TopHomeCard(),
-              TitleText(text:"Bares e Restaurantes"),
+              TitleText(
+                text: "Lugares para Conhecer",
+                methodCallBack: AttractionAll(),
+              ),
+              MainHomeAttractions(),
+              TitleText(
+                text: "Bares e Restaurantes",
+                methodCallBack: AttractionAll(),
+              ),
               RestaurantsHomeCards(),
             ],
           ),
@@ -80,17 +90,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
 
-    if (_currentIndex == 2){
+    if (_currentIndex == 2) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => IntelligenceTravelPage()),
       );
     }
-
   }
 }
