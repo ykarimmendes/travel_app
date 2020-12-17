@@ -1,16 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/attractions/attractions_all.dart';
-import 'package:travelapp/home/events/events_home_card.dart';
-import 'package:travelapp/util/utils.dart';
-
-import 'home/app_bar_home.dart';
-import 'home/filter_home.dart';
-import 'home/main_attractions/main_home_attractions.dart';
-import 'home/restaurants/restaurants_home_cards.dart';
-import 'intelligence_travel/intelligence_travel_page.dart';
-import 'widgets/title_text.dart';
+import 'app/ui/atracctions/attractions_all.dart';
+import 'app/ui/home/app_bar_home.dart';
+import 'app/ui/home/events_home_card.dart';
+import 'app/ui/home/filter_home.dart';
+import 'app/ui/home/main_home_attractions.dart';
+import 'app/ui/home/restaurants_home_cards.dart';
+import 'app/ui/intelligente_travel/intelligence_travel_page.dart';
+import 'app/ui/theme/utils.dart';
+import 'app/ui/widgets/title_text.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
