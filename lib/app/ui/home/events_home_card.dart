@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
-import 'package:travelapp/app/data/model/event.dart';
+import 'package:get/get.dart';
+import 'package:travelapp/app/data/controller/event_controller.dart';
 import 'package:travelapp/app/ui/events/event_page.dart';
 import 'package:travelapp/app/ui/widgets/card_text.dart';
 import 'package:travelapp/app/ui/widgets/card_title.dart';
@@ -8,16 +9,16 @@ import 'package:travelapp/app/ui/widgets/card_title.dart';
 class EventsHomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('events').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        final Event event = Event.fromSnapshot(snapshot.data.docs.first);
+
+    return GetX<EventController>(
+      initState: (state){Get.find<EventController>().getAll();},
+      builder: (_) {
+        if (_.eventsList.length == 0) return LinearProgressIndicator();
         return GestureDetector(
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => EventPage(event)),
+              MaterialPageRoute(builder: (context) => EventPage(_.eventsList[0])),
             );
           },
           child: Container(
@@ -39,7 +40,7 @@ class EventsHomeCard extends StatelessWidget {
                       elevation: 5,
                       clipBehavior: Clip.antiAlias,
                       child: Image.network(
-                        event.photoCoverThumb,
+                        _.eventsList[0].photoCoverThumb,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -51,10 +52,10 @@ class EventsHomeCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          CardTitle(event.title),
+                          CardTitle(_.eventsList[0].title),
                           SizedBox(height: 8),
                           Text(
-                            event.smallDescription,
+                            _.eventsList[0].smallDescription,
                             style: TextStyle(
                               color: Colors.red,
                               fontWeight: FontWeight.w500,
@@ -63,7 +64,7 @@ class EventsHomeCard extends StatelessWidget {
                           SizedBox(height: 4),
                           Flexible(
                             child: CardText(
-                              event.description,
+                              _.eventsList[0].description,
                             ),
                           )
                         ],

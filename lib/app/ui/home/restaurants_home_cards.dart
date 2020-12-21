@@ -21,7 +21,7 @@ class RestaurantsHomeCards extends StatelessWidget {
   }
 }
 
-Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
   return ListView(
     physics: NeverScrollableScrollPhysics(),
     shrinkWrap: true,
