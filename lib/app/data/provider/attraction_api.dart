@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class EventApi {
+class AttractionApi {
  Future<Stream<QuerySnapshot>>  getAll() async{
-   Stream<QuerySnapshot> s = FirebaseFirestore.instance.collection('events').snapshots();
+   Stream<QuerySnapshot> s = FirebaseFirestore.instance.collection('attractions').snapshots();
     return s;
   }
 }

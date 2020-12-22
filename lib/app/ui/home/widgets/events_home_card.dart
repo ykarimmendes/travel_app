@@ -6,7 +6,7 @@ import 'package:travelapp/app/ui/events/event_page.dart';
 import 'package:travelapp/app/ui/widgets/card_text.dart';
 import 'package:travelapp/app/ui/widgets/card_title.dart';
 
-class EventsHomeCard extends StatelessWidget {
+class EventsHomeCard extends GetView<EventController> {
   @override
   Widget build(BuildContext context) {
 

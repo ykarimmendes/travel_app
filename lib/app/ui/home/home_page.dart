@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/controller/attraction_controller.dart';
+import 'package:travelapp/app/data/controller/home_controller.dart';
 import 'package:travelapp/app/ui/atracctions/attractions_all.dart';
 import 'package:travelapp/app/ui/theme/utils.dart';
 import 'package:travelapp/app/ui/widgets/title_text.dart';
@@ -11,7 +12,7 @@ import 'widgets/filter_home.dart';
 import 'widgets/main_home_attractions.dart';
 import 'widgets/restaurants_home_cards.dart';
 
-class HomePage extends GetView<EventController> {
+class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

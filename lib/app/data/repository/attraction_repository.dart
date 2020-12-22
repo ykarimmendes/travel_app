@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:travelapp/app/data/provider/event_api.dart';
+import 'package:travelapp/app/data/provider/attraction_api.dart';
 
-class EventRepository{
-  final EventApi _eventApi;
-  EventRepository(this._eventApi);
+class AttractionRepository{
+  final AttractionApi _attractionApi;
+  AttractionRepository(this._attractionApi);
 
   Future<Stream<QuerySnapshot>>  getAll() async{
-    return _eventApi.getAll();
+    return _attractionApi.getAll();
   }
 
 }

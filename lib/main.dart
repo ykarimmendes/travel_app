@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/bindings/event_biding.dart';
+import 'package:travelapp/app/bindings/home_biding.dart';
 import 'package:travelapp/app/ui/home/home_page.dart';
 import 'app/ui/intelligente_travel/intelligence_travel_page.dart';
 
@@ -32,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialBinding: EventBiding(),
+      initialBinding: HomeBiding(),
       home: HomePage(),
     );
   }
