@@ -1,24 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:travelapp/app/data/model/event.dart';
-import 'package:travelapp/app/data/repository/event_repository.dart';
+import 'package:travelapp/app/data/model/attraction.dart';
+import 'package:travelapp/app/data/repository/attraction_repository.dart';
 
-class EventController extends GetxController {
+class AttractionController extends GetxController {
 
-  final EventRepository _repository;
-  EventController(this._repository);
+  final AttractionRepository _repository;
+  AttractionController(this._repository);
 
-  final _eventsList = List<Event>().obs;
+  final _attractionsList = List<Attraction>().obs;
 
-  get eventsList => this._eventsList;
-  set eventsList(value) => this._eventsList.assignAll(value);
+  get attractionsList => this._attractionsList;
+  set attractionsList(value) => this._attractionsList.assignAll(value);
 
   getAll() {
     _repository.getAll().then((data) {
       Stream<QuerySnapshot> productRef = data;
       productRef.forEach((field){
         field.docs.asMap().forEach((index, data) {
-          _eventsList.assign(Event.fromSnapshot(data));
+          _attractionsList.add(Attraction.fromSnapshot(data));
         });
       });
     });

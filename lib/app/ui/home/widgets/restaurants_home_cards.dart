@@ -1,6 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:travelapp/app/data/controller/restaurant_controller.dart';
 import 'package:travelapp/app/data/model/restaurant.dart';
+import 'package:travelapp/app/data/provider/restaurant_api.dart';
+import 'package:travelapp/app/data/repository/restaurant_repository.dart';
 import 'package:travelapp/app/ui/restaurants/restaurant_page.dart';
 import 'package:travelapp/app/ui/widgets/card_title.dart';
 
@@ -11,17 +14,18 @@ class RestaurantsHomeCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('business').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildList(context, snapshot.data.docs);
+    return GetX<RestaurantController>(
+      initState: (state){Get.find<RestaurantController>().getAll();},
+      init: RestaurantController(RestaurantRepository(RestaurantApi())),
+      builder: (_) {
+        if (_.restaurantsList.length == 0) return LinearProgressIndicator();
+        return _buildList(context, _.restaurantsList);
       },
     );
   }
 }
 
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  Widget _buildList(BuildContext context, List<Restaurant> snapshot) {
   return ListView(
     physics: NeverScrollableScrollPhysics(),
     shrinkWrap: true,
@@ -29,8 +33,7 @@ class RestaurantsHomeCards extends StatelessWidget {
   );
 }
 
-Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-  final restaurant = Restaurant.fromSnapshot(data);
+Widget _buildListItem(BuildContext context, Restaurant restaurant) {
   return GestureDetector(
     onTap: () {
       Navigator.push(

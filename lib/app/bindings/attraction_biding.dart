@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
-import 'package:travelapp/app/data/controller/event_controller.dart';
-import 'package:travelapp/app/data/provider/event_api.dart';
-import 'package:travelapp/app/data/repository/event_repository.dart';
+import 'package:travelapp/app/data/controller/attraction_controller.dart';
+import 'package:travelapp/app/data/provider/attraction_api.dart';
+import 'package:travelapp/app/data/repository/attraction_repository.dart';
 
-class EventBiding implements Bindings {
+class AttractionBiding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<EventController>(() {
-      return EventController(
-          EventRepository(EventApi()));
+    Get.lazyPut<AttractionController>(() {
+      return AttractionController(
+          AttractionRepository(AttractionApi()));
     });
   }
 }

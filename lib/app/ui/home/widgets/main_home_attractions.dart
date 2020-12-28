@@ -1,6 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:travelapp/app/data/controller/attraction_controller.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
+import 'package:travelapp/app/data/provider/attraction_api.dart';
+import 'package:travelapp/app/data/repository/attraction_repository.dart';
 import 'package:travelapp/app/ui/atracctions/attraction_page.dart';
 import 'package:travelapp/app/ui/widgets/card_text.dart';
 import 'package:travelapp/app/ui/widgets/card_title.dart';
@@ -8,29 +11,28 @@ import 'package:travelapp/app/ui/widgets/card_title.dart';
 class MainHomeAttractions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream:
-          FirebaseFirestore.instance.collectionGroup('attractions').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildList(context, snapshot.data.docs);
+    return GetX<AttractionController>(
+      initState: (state){Get.find<AttractionController>().getAll();},
+      init: AttractionController(AttractionRepository(AttractionApi())),
+      builder: (_) {
+        if (_.attractionsList.length == 0) return LinearProgressIndicator();
+        return _buildList(context, _.attractionsList);
       },
     );
   }
 }
 
-Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+Widget _buildList(BuildContext context, List<Attraction> attractions) {
   return SizedBox(
     height: 260,
     child: ListView(
       scrollDirection: Axis.horizontal,
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+      children: attractions.map((data) => _buildListItem(context, data)).toList(),
     ),
   );
 }
 
-Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-  final att = Attraction.fromSnapshot(data);
+Widget _buildListItem(BuildContext context, Attraction att) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
