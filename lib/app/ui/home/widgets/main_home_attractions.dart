@@ -38,7 +38,7 @@ Widget _buildListItem(BuildContext context, Attraction att) {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AttractionPage(att),
+            builder: (context) => AttractionPage.arg(att),
           ));
     },
     child: SizedBox(

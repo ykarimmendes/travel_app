@@ -13,8 +13,9 @@ import 'package:travelapp/app/ui/widgets/title_page_text.dart';
 import 'package:travelapp/app/ui/widgets/topic_text.dart';
 
 class AttractionPage extends StatefulWidget {
-  final Attraction _att;
-  AttractionPage(this._att);
+  Attraction _att;
+  AttractionPage.arg(this._att);
+  AttractionPage();
 
   @override
   _AttractionPageState createState() => _AttractionPageState();
