@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/controller/event_controller.dart';
+import 'package:travelapp/app/data/provider/event_api.dart';
+import 'package:travelapp/app/data/repository/event_repository.dart';
 import 'package:travelapp/app/ui/events/event_page.dart';
 import 'package:travelapp/app/ui/widgets/card_text.dart';
 import 'package:travelapp/app/ui/widgets/card_title.dart';
@@ -12,6 +14,7 @@ class EventsHomeCard extends GetView<EventController> {
 
     return GetX<EventController>(
       initState: (state){Get.find<EventController>().getAll();},
+      init: EventController(EventRepository(EventApi())),
       builder: (_) {
         if (_.eventsList.length == 0) return LinearProgressIndicator();
         return GestureDetector(
