@@ -26,10 +26,10 @@ class HomeController extends GetxController {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            FilterHome(),
             TitleText(
               text: "Eventos de Blumenau",
               methodCallBack: AttractionAll(),
+              top: 10,
             ),
             EventsHomeCard(),
             TitleText(

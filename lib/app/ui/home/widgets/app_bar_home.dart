@@ -20,7 +20,7 @@ class AppBarWidget extends StatelessWidget {
           padding: EdgeInsets.only(top: 40, left: 10, right: 10),
           child: Card(
             shadowColor: Colors.grey,
-            elevation: 5,
+            elevation: 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
