@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:travelapp/app/data/controller/attraction_controller.dart';
-import 'package:travelapp/app/data/model/attraction.dart';
-import 'package:travelapp/app/data/provider/attraction_api.dart';
-import 'package:travelapp/app/data/repository/attraction_repository.dart';
-import 'package:travelapp/app/ui/atracctions/attraction_page.dart';
+import 'package:travelapp/app/data/controller/event_controller.dart';
+import 'package:travelapp/app/data/model/event.dart';
+import 'package:travelapp/app/data/provider/event_api.dart';
+import 'package:travelapp/app/data/repository/event_repository.dart';
 
-class AttractionAll  extends GetView<AttractionController> {
+import 'event_page.dart';
+
+class EventAll  extends GetView<EventController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +17,7 @@ class AttractionAll  extends GetView<AttractionController> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          "Lugares em Blumenau",
+          "Eventos em Blumenau",
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -27,11 +28,11 @@ class AttractionAll  extends GetView<AttractionController> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              GetX<AttractionController>(
-                init: AttractionController(AttractionRepository(AttractionApi())),
+              GetX<EventController>(
+                init: EventController(EventRepository(EventApi())),
                 builder: (_) {
-                  if (_.attractionsList.length == 0) return LinearProgressIndicator();
-                  return buildListView(context, _.attractionsList);
+                  if (_.eventsList.length == 0) return LinearProgressIndicator();
+                  return buildListView(context, _.eventsList);
                 },
               ),
             ],
@@ -42,7 +43,7 @@ class AttractionAll  extends GetView<AttractionController> {
   }
 
   ListView buildListView(
-      BuildContext context, List<Attraction> atts) {
+      BuildContext context, List<Event> atts) {
     return ListView(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -50,14 +51,14 @@ class AttractionAll  extends GetView<AttractionController> {
     );
   }
 
-  SizedBox _buildSizedBox(BuildContext context, Attraction attraction) {
+  SizedBox _buildSizedBox(BuildContext context, Event event) {
     return SizedBox(
       height: 135,
       child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AttractionPage(attraction)),
+            MaterialPageRoute(builder: (context) => EventPage(event)),
           );
         },
         child: Card(
@@ -76,7 +77,7 @@ class AttractionAll  extends GetView<AttractionController> {
                       child: Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Image.network(
-                          attraction.photoCoverThumb,
+                          event.photoCoverThumb,
                           fit: BoxFit.cover,
                           width: 150,
                         ),
@@ -94,7 +95,7 @@ class AttractionAll  extends GetView<AttractionController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        attraction.title,
+                        event.title,
                         style: TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 17),
                       ),
@@ -103,7 +104,7 @@ class AttractionAll  extends GetView<AttractionController> {
                         width: MediaQuery.of(context).size.width / 2.3,
                         padding: const EdgeInsets.only(top: 6),
                         child: Text(
-                          attraction.resume,
+                          event.title,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           maxLines: 3,

@@ -13,6 +13,7 @@ import 'package:travelapp/app/ui/widgets/topic_text.dart';
 
 class RestaurantPage extends StatefulWidget {
   final Restaurant _restaurant;
+
   RestaurantPage(this._restaurant);
 
   @override
@@ -49,9 +50,9 @@ class _RestaurantPageState extends State<RestaurantPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    NameLocation(_restaurant),
-                    DescriptionLocation(_restaurant),
-                    PhotosTextLocation("Fotos"),
+                    nameLocation(_restaurant),
+                    descriptionLocation(_restaurant, context),
+                    photosTextLocation("Fotos"),
                     PhotosPage(_restaurant.reference.id,
                         describeEnum(CollectionEnum.business)),
                   ],
@@ -63,15 +64,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
       ),
     );
   }
-}
 
-class PhotosTextLocation extends StatelessWidget {
-  final String text;
-
-  PhotosTextLocation(this.text);
-
-  @override
-  Widget build(BuildContext context) {
+  photosTextLocation(String text) {
     return Padding(
       padding: const EdgeInsets.only(top: 25),
       child: CText(
@@ -83,14 +77,8 @@ class PhotosTextLocation extends StatelessWidget {
       ),
     );
   }
-}
 
-class DescriptionLocation extends StatelessWidget {
-  final Restaurant _restaurant;
-  DescriptionLocation(this._restaurant);
-
-  @override
-  Widget build(BuildContext context) {
+  descriptionLocation(Restaurant _restaurant, BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,66 +101,56 @@ class DescriptionLocation extends StatelessWidget {
       ],
     );
   }
-}
 
-class NameLocation extends StatelessWidget {
-  final Restaurant _restaurant;
-  NameLocation(this._restaurant);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        LocationName(),
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              TitlePageText(_restaurant.title),
-            ],
+  nameLocation(Restaurant _restaurant) {
+    @override
+    Widget build(BuildContext context) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          locationName(),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                TitlePageText(_restaurant.title),
+              ],
+            ),
           ),
-        ),
-        CText(
-          text:
-              "${_restaurant.address.address}, ${_restaurant.address.number} - ${_restaurant.address.neighborhood}",
-          height: 1.8,
-          maxLines: 5,
-          textAlign: TextAlign.justify,
-        ),
-        CText(
-          text: _restaurant.openingHour,
-          height: 1.4,
-          maxLines: 5,
-          textAlign: TextAlign.justify,
-          fontSize: 13,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              MainAttractionIcons(text: "Favorito", icon: Icons.favorite),
-              MainAttractionIcons(text: "Mapa", icon: Icons.map),
-              MainAttractionIcons(text: "Compartilhar", icon: Icons.share),
-            ],
+          CText(
+            text:
+                "${_restaurant.address.address}, ${_restaurant.address.number} - ${_restaurant.address.neighborhood}",
+            height: 1.8,
+            maxLines: 5,
+            textAlign: TextAlign.justify,
           ),
-        ),
-      ],
-    );
+          CText(
+            text: _restaurant.openingHour,
+            height: 1.4,
+            maxLines: 5,
+            textAlign: TextAlign.justify,
+            fontSize: 13,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                mainAttractionIcons("Favorito", Icons.favorite, null),
+                mainAttractionIcons("Mapa", Icons.map, null),
+                mainAttractionIcons("Compartilhar", Icons.share, null),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
   }
-}
 
-class LocationName extends StatelessWidget {
-  const LocationName({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  locationName() {
     return Row(
       children: <Widget>[
         Icon(
@@ -190,31 +168,22 @@ class LocationName extends StatelessWidget {
   }
 }
 
-class MainAttractionIcons extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  Color color;
+mainAttractionIcons(String text, IconData icon, Color color) {
+  if (color == null) color = Colors.grey[500];
 
-  MainAttractionIcons({@required this.text, @required this.icon, this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    if (color == null) color = Colors.grey[500];
-
-    return Column(
-      children: <Widget>[
-        Icon(
-          icon,
-          color: color,
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        CText(
-          text: text,
-          fontSize: 17,
-        ),
-      ],
-    );
-  }
+  return Column(
+    children: <Widget>[
+      Icon(
+        icon,
+        color: color,
+      ),
+      SizedBox(
+        height: 15,
+      ),
+      CText(
+        text: text,
+        fontSize: 17,
+      ),
+    ],
+  );
 }

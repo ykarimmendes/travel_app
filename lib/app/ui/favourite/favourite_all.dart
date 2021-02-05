@@ -1,22 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:travelapp/app/data/controller/attraction_controller.dart';
+import 'package:travelapp/app/data/controller/favourite_controller.dart';
+import 'package:travelapp/app/data/controller/home_controller.dart';
+import 'package:travelapp/app/data/controller/login_controller.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
-import 'package:travelapp/app/data/provider/attraction_api.dart';
-import 'package:travelapp/app/data/repository/attraction_repository.dart';
+import 'package:travelapp/app/data/provider/favourite_api.dart';
+import 'package:travelapp/app/data/repository/favourite_repository.dart';
 import 'package:travelapp/app/ui/atracctions/attraction_page.dart';
 
-class AttractionAll  extends GetView<AttractionController> {
+class FavouriteAll  extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    final _userController = Get.find<LoginController>();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          "Lugares em Blumenau",
+          "Meus Favoritos",
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -27,11 +30,12 @@ class AttractionAll  extends GetView<AttractionController> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              GetX<AttractionController>(
-                init: AttractionController(AttractionRepository(AttractionApi())),
+              GetX<FavouriteController>(
+                initState: (state){Get.find<FavouriteController>().get(_userController.login);},
+                init: FavouriteController(FavouriteRepository(FavouriteApi())),
                 builder: (_) {
-                  if (_.attractionsList.length == 0) return LinearProgressIndicator();
-                  return buildListView(context, _.attractionsList);
+                  if (_.favouritesList.length == 0) return LinearProgressIndicator();
+                  return buildListView(context, _.favouritesList);
                 },
               ),
             ],
@@ -50,14 +54,14 @@ class AttractionAll  extends GetView<AttractionController> {
     );
   }
 
-  SizedBox _buildSizedBox(BuildContext context, Attraction attraction) {
+  SizedBox _buildSizedBox(BuildContext context, Attraction att) {
     return SizedBox(
       height: 135,
       child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AttractionPage(attraction)),
+            MaterialPageRoute(builder: (context) => AttractionPage(att)),
           );
         },
         child: Card(
@@ -76,7 +80,7 @@ class AttractionAll  extends GetView<AttractionController> {
                       child: Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Image.network(
-                          attraction.photoCoverThumb,
+                          att.photoCoverThumb,
                           fit: BoxFit.cover,
                           width: 150,
                         ),
@@ -94,7 +98,7 @@ class AttractionAll  extends GetView<AttractionController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        attraction.title,
+                        att.title,
                         style: TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 17),
                       ),
@@ -103,7 +107,7 @@ class AttractionAll  extends GetView<AttractionController> {
                         width: MediaQuery.of(context).size.width / 2.3,
                         padding: const EdgeInsets.only(top: 6),
                         child: Text(
-                          attraction.resume,
+                          att.title,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           maxLines: 3,
@@ -144,4 +148,6 @@ class StatsLocation extends StatelessWidget {
       ],
     );
   }
+
+
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/app/data/model/photo.dart';
+import 'package:travelapp/app/data/model/social_media.dart';
+import 'package:travelapp/app/ui/social_media/social_media_page.dart';
 import 'package:travelapp/app/ui/widgets/custom_text.dart';
 
 class PhotoAttractionPage extends StatefulWidget {
@@ -16,6 +18,9 @@ class _PhotoAttractionPageState extends State<PhotoAttractionPage> {
   @override
   Widget build(BuildContext context) {
     final Photo _photo = widget._photo;
+    List<SocialMedia> medias= new List<SocialMedia>();
+    SocialMedia sm = SocialMedia();
+    medias = sm.getAllSocialMedia({ "Facebook":"www.facebook.com.br"});
     return Scaffold(
       body: Container(
         color: Color.fromRGBO(242, 241, 243, 1),
@@ -78,13 +83,7 @@ class _PhotoAttractionPageState extends State<PhotoAttractionPage> {
             ),
             Expanded(
               flex: 25,
-              child: Row(
-                children: <Widget>[
-                  Text("Facebook"),
-                  Text("Facebook"),
-                  Text("Facebook")
-                ],
-              ),
+              child: SocialMediaPage(medias),
             ),
           ],
         ),

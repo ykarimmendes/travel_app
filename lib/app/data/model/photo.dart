@@ -6,6 +6,7 @@ class Photo {
   final String urlThumb;
   final DocumentReference reference;
 
+
   Photo.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 

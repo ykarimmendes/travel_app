@@ -8,7 +8,7 @@ import 'package:travelapp/app/ui/atracctions/attraction_page.dart';
 import 'package:travelapp/app/ui/widgets/card_text.dart';
 import 'package:travelapp/app/ui/widgets/card_title.dart';
 
-class MainHomeAttractions extends StatelessWidget {
+class AttractionHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<AttractionController>(
@@ -38,7 +38,7 @@ Widget _buildListItem(BuildContext context, Attraction att) {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AttractionPage.arg(att),
+            builder: (context) => AttractionPage(att),
           ));
     },
     child: SizedBox(

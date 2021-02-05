@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:travelapp/app/data/controller/attraction_controller.dart';
 import 'package:travelapp/app/data/controller/home_controller.dart';
+import 'package:travelapp/app/data/provider/home_api.dart';
+import 'package:travelapp/app/data/repository/home_repository.dart';
+
 
 import 'widgets/app_bar_home.dart';
 
@@ -9,6 +11,8 @@ class HomePage extends  StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<HomeController>(
+      initState: (state){Get.find<HomeController>().getUser();},
+      init: HomeController(HomeRepository(HomeApi())),
         builder: (_){
           return Scaffold(
             appBar: PreferredSize(

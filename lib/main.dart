@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:travelapp/app/bindings/home_biding.dart';
 import 'package:travelapp/app/ui/home/home_page.dart';
 
+import 'app/ui/login/login.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -31,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: HomeBiding(),
-      home: HomePage(),
+      home: Login(),
     );
   }
 
