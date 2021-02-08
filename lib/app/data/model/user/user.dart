@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:travelapp/app/data/model/user/favourite.dart';
 
 class User {
 
   String email;
   String name;
   String id;
+  List<String> favourites;
   DocumentReference reference;
 
   User();

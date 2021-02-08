@@ -3,6 +3,7 @@ import 'package:travelapp/app/data/controller/attraction_controller.dart';
 import 'package:travelapp/app/data/controller/event_controller.dart';
 import 'package:travelapp/app/data/controller/home_controller.dart';
 import 'package:travelapp/app/data/controller/login_controller.dart';
+import 'package:travelapp/app/data/model/user/user.dart';
 import 'package:travelapp/app/data/provider/attraction_api.dart';
 import 'package:travelapp/app/data/provider/event_api.dart';
 import 'package:travelapp/app/data/provider/home_api.dart';

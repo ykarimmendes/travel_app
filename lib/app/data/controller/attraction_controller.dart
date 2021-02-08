@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
+import 'package:travelapp/app/data/model/user/user.dart';
 import 'package:travelapp/app/data/repository/attraction_repository.dart';
 
 class AttractionController extends GetxController {
@@ -9,18 +10,21 @@ class AttractionController extends GetxController {
   AttractionController(this._repository);
 
   final _attractionsList = List<Attraction>().obs;
-
   get attractionsList => this._attractionsList;
-  set attractionsList(value) => this._attractionsList.assignAll(value);
+  set attractionsList(value) => this._attractionsList.value;
 
-  getAll() {
-    _repository.getAll().then((data) {
-      Stream<QuerySnapshot> productRef = data;
-      productRef.forEach((field){
-        field.docs.asMap().forEach((index, data) {
-          _attractionsList.add(Attraction.fromSnapshot(data));
+  getAll(User user) {
+    _repository.getAll().listen((data) {
+        data.docs.asMap().forEach((index, data) {
+          Attraction att = Attraction.fromSnapshot(data);
+          att.isFavourite = isFavourite(user, att);
+          _attractionsList.add(att);
         });
-      });
     });
   }
+
+  isFavourite(User user,Attraction att){
+    return user.favourites.any((element) => element == att.reference.id);
+  }
+
 }

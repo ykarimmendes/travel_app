@@ -11,7 +11,4 @@ class FavouriteRepository {
     return _favouriteApi.get(favourite);
   }
 
-  Stream<List<String>> getFavouritesByUser(User user) {
-    return _favouriteApi.getFavouritesByUser(user);
-  }
 }

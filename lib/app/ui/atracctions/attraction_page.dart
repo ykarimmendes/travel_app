@@ -162,7 +162,7 @@ class NameLocation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconPage(text: "Favoritoo", icon: Icons.favorite),
+              IconPage(text: "Favorito", icon: Icons.favorite, iconColor: _att.isFavourite ?  Colors.red : Colors.grey,),
               IconPage(text: "Mapa", icon: Icons.map),
               IconPage(text: "Compartilhar", icon: Icons.share),
             ],

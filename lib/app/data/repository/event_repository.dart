@@ -5,7 +5,7 @@ class EventRepository{
   final EventApi _eventApi;
   EventRepository(this._eventApi);
 
-  Future<Stream<QuerySnapshot>>  getAll() async{
+  Stream<QuerySnapshot>  getAll() {
     return _eventApi.getAll();
   }
 

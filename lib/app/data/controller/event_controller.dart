@@ -14,12 +14,9 @@ class EventController extends GetxController {
   set eventsList(value) => this._eventsList.assignAll(value);
 
   getAll() {
-    _repository.getAll().then((data) {
-      Stream<QuerySnapshot> productRef = data;
-      data.forEach((field){
-        field.docs.asMap().forEach((index, data) {
-          _eventsList.assign(Event.fromSnapshot(data));
-        });
+    _repository.getAll().listen((data) {
+      data.docs.forEach((field){
+          _eventsList.assign(Event.fromSnapshot(field));
       });
     });
   }

@@ -16,13 +16,12 @@ class FavouriteController extends GetxController {
   set favouritesList(value) => this._favouritesList.assignAll(value);
 
   get(User user){
-    _repository.getFavouritesByUser(user).listen((element) {
-      element.forEach((element2) {
-        _repository.get(element2).listen((data) {
+      user.favourites.forEach((element) {
+        _repository.get(element).listen((data) {
           _favouritesList.assign(Attraction.fromSnapshot(data));
         });
       });
-    });
+
   }
 
 }

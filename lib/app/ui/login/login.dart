@@ -58,25 +58,25 @@ class Login extends GetView<LoginController> {
                       width: MediaQuery.of(context).size.width,
                       height: 100,
                       child: RaisedButton(
-                          onPressed: () {
-                            c.get();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()),
-                            );
-                          },
-                          color: Colors.transparent,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.black)),
-                          child: Text(
-                            "Logar",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          textColor: Colors.black,
+
+                        onPressed: () async {
+                          await c.get();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                        color: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.black)),
+                        child: Text(
+                          "Logar",
+                          style: TextStyle(fontSize: 18),
                         ),
+                        textColor: Colors.black,
+                      ),
                     ),
                     Text(
                       "Esqueceu a porra da senha?",

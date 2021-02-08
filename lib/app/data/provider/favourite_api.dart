@@ -10,14 +10,4 @@ class FavouriteApi {
 
   }
 
-  Stream<List<String>> getFavouritesByUser(User user) async* {
-    yield* FirebaseFirestore.instance
-        .collection('user')
-        .doc(user.reference.id)
-        .collection('favourite')
-        .snapshots()
-        .map((event) =>
-            event.docs.map(
-            (e) => e.get('id').toString().trim()).toList());
-  }
 }

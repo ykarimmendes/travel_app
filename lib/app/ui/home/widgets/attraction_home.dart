@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/controller/attraction_controller.dart';
+import 'package:travelapp/app/data/controller/login_controller.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/provider/attraction_api.dart';
+import 'package:travelapp/app/data/provider/login_api.dart';
 import 'package:travelapp/app/data/repository/attraction_repository.dart';
+import 'package:travelapp/app/data/repository/login_repository.dart';
 import 'package:travelapp/app/ui/atracctions/attraction_page.dart';
 import 'package:travelapp/app/ui/widgets/card_text.dart';
 import 'package:travelapp/app/ui/widgets/card_title.dart';
 
 class AttractionHome extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LoginController(LoginRepository(LoginApi())));
     return GetX<AttractionController>(
-      initState: (state){Get.find<AttractionController>().getAll();},
+      initState: (state){Get.find<AttractionController>().getAll(loginController.login);},
       init: AttractionController(AttractionRepository(AttractionApi())),
       builder: (_) {
         if (_.attractionsList.length == 0) return LinearProgressIndicator();

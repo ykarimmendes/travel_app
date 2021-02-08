@@ -9,6 +9,7 @@ class Attraction {
   final String photoCover;
   final String photoCoverThumb;
   final String category;
+  bool isFavourite;
   DocumentReference reference;
 
   Attraction.fromSnapshot(DocumentSnapshot snapshot)

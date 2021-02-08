@@ -5,8 +5,8 @@ class AttractionRepository{
   final AttractionApi _attractionApi;
   AttractionRepository(this._attractionApi);
 
-  Future<Stream<QuerySnapshot>>  getAll() async{
-    return _attractionApi.getAll();
+  Stream<QuerySnapshot>  getAll() async*{
+    yield* _attractionApi.getAll();
   }
 
 }

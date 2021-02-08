@@ -6,7 +6,7 @@ class HomeRepository {
 
   HomeRepository(this._homeApi);
 
-  Future<Stream<QuerySnapshot>> getUser() async {
+  Stream<QuerySnapshot> getUser()  {
     return _homeApi.getUser();
   }
   
