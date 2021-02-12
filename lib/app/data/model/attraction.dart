@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Attraction {
-  final String title;
-  final String resume;
-  final int top;
-  final String topImage;
-  final String about;
-  final String photoCover;
-  final String photoCoverThumb;
-  final String category;
-  bool isFavourite;
+  String title;
+  String resume;
+  int top;
+  String topImage;
+  String about;
+  String photoCover;
+  String photoCoverThumb;
+  String category;
+  bool isFavourite = false;
   DocumentReference reference;
+
+  Attraction();
 
   Attraction.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);

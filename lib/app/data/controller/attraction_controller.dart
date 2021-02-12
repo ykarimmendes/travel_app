@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/model/user/user.dart';
@@ -13,11 +13,10 @@ class AttractionController extends GetxController {
   get attractionsList => this._attractionsList;
   set attractionsList(value) => this._attractionsList.value;
 
-  getAll(User user) {
+  getAll()  {
     _repository.getAll().listen((data) {
         data.docs.asMap().forEach((index, data) {
           Attraction att = Attraction.fromSnapshot(data);
-          att.isFavourite = isFavourite(user, att);
           _attractionsList.add(att);
         });
     });

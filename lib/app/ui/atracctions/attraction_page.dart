@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:travelapp/app/data/controller/login_controller.dart';
 import 'package:travelapp/app/data/model/address.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/model/collection_enum.dart';
+import 'package:travelapp/app/data/model/user/user.dart';
 import 'package:travelapp/app/ui/widgets/back_icon_page.dart';
 import 'package:travelapp/app/ui/widgets/custom_text.dart';
 import 'package:travelapp/app/ui/widgets/icons_page.dart';
@@ -14,6 +17,7 @@ import 'package:travelapp/app/ui/widgets/topic_text.dart';
 
 class AttractionPage extends StatefulWidget {
   final Attraction _att;
+
   AttractionPage(this._att);
 
   @override
@@ -85,6 +89,7 @@ class _AttractionPageState extends State<AttractionPage> {
 
 class DescriptionLocation extends StatelessWidget {
   final Attraction att;
+
   DescriptionLocation(this.att);
 
   @override
@@ -127,6 +132,7 @@ class StatsLocation extends StatelessWidget {
 class NameLocation extends StatelessWidget {
   final Attraction _att;
   final Address _add;
+
   NameLocation(this._att, this._add);
 
   @override
@@ -162,7 +168,7 @@ class NameLocation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconPage(text: "Favorito", icon: Icons.favorite, iconColor: _att.isFavourite ?  Colors.red : Colors.grey,),
+              Obx(() =>Icon(Icons.favorite, color: _att.isFavourite ? Colors.red : Colors.grey,),),
               IconPage(text: "Mapa", icon: Icons.map),
               IconPage(text: "Compartilhar", icon: Icons.share),
             ],
@@ -175,6 +181,7 @@ class NameLocation extends StatelessWidget {
 
 class LocationName extends StatelessWidget {
   final Attraction _att;
+
   LocationName(this._att);
 
   @override

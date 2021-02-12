@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/model/user/user.dart';
 import 'package:travelapp/app/data/repository/login_repository.dart';
@@ -15,12 +14,8 @@ class LoginController extends GetxController {
 
   get() async{
     await _repository.getUser().then((data) {
-      data.forEach((data) async {
-        login = data;
-        await _repository.getFavouritesByUser(data).then((event) {
-          login.favourites = event;
-          return _login;
-        });
+      data.docs.forEach((data) async {
+        login = User.fromSnapshot(data);
       });
     });
   }

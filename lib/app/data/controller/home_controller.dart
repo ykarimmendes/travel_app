@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:travelapp/app/data/model/user/user.dart';
 import 'package:travelapp/app/data/repository/home_repository.dart';
 import 'package:travelapp/app/ui/atracctions/attractions_all.dart';
 import 'package:travelapp/app/ui/events/events_all.dart';

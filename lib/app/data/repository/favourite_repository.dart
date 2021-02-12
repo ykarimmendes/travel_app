@@ -11,4 +11,8 @@ class FavouriteRepository {
     return _favouriteApi.get(favourite);
   }
 
+  Stream<QuerySnapshot> getFavouritesByUser(User user){
+    return _favouriteApi.getFavouritesByUser(user);
+  }
+
 }

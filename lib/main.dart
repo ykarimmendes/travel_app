@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/bindings/home_biding.dart';
-import 'package:travelapp/app/ui/home/home_page.dart';
 
 import 'app/ui/login/login.dart';
 

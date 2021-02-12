@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:travelapp/app/data/controller/login_controller.dart';
 
 import 'custom_buttom.dart';
 

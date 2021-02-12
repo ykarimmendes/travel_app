@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:travelapp/app/data/controller/favourite_controller.dart';
 import 'package:travelapp/app/data/controller/home_controller.dart';
 import 'package:travelapp/app/data/controller/login_controller.dart';
+import 'package:travelapp/app/data/provider/favourite_api.dart';
 import 'package:travelapp/app/data/provider/home_api.dart';
 import 'package:travelapp/app/data/provider/login_api.dart';
+import 'package:travelapp/app/data/repository/favourite_repository.dart';
 import 'package:travelapp/app/data/repository/home_repository.dart';
 import 'package:travelapp/app/data/repository/login_repository.dart';
 
@@ -17,6 +20,13 @@ class HomePage extends  StatelessWidget {
     return GetX<HomeController>(
       init: HomeController(HomeRepository(HomeApi())),
         builder: (_){
+        //TODO acho que rasga
+          final loginController = Get.put(LoginController(LoginRepository(LoginApi())));
+          final favouriteController = Get.put(FavouriteController(FavouriteRepository(FavouriteApi())));
+          favouriteController.getFavouritesByUser(loginController.login).listen((event) {
+            loginController.login.favourites = event;
+          });
+
           return Scaffold(
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(80),

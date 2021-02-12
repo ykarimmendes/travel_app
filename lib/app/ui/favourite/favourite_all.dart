@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/controller/favourite_controller.dart';
 import 'package:travelapp/app/data/controller/home_controller.dart';
-import 'package:travelapp/app/data/controller/login_controller.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/provider/favourite_api.dart';
 import 'package:travelapp/app/data/repository/favourite_repository.dart';
@@ -12,7 +11,7 @@ import 'package:travelapp/app/ui/atracctions/attraction_page.dart';
 class FavouriteAll  extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    final _userController = Get.find<LoginController>();
+    //final _userController = Get.find<LoginController>();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -31,7 +30,6 @@ class FavouriteAll  extends GetView<HomeController> {
           child: Column(
             children: <Widget>[
               GetX<FavouriteController>(
-                initState: (state){Get.find<FavouriteController>().get(_userController.login);},
                 init: FavouriteController(FavouriteRepository(FavouriteApi())),
                 builder: (_) {
                   if (_.favouritesList.length == 0) return LinearProgressIndicator();

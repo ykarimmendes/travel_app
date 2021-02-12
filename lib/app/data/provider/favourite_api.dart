@@ -10,4 +10,12 @@ class FavouriteApi {
 
   }
 
+  Stream<QuerySnapshot> getFavouritesByUser(User user) {
+    return FirebaseFirestore.instance
+        .collection('user')
+        .doc(user.reference.id)
+        .collection('favourite')
+        .snapshots();
+  }
+
 }

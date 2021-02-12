@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/model/event.dart';
 import 'package:travelapp/app/data/repository/event_repository.dart';
