@@ -20,12 +20,10 @@ class HomePage extends  StatelessWidget {
     return GetX<HomeController>(
       init: HomeController(HomeRepository(HomeApi())),
         builder: (_){
-        //TODO acho que rasga
+        //TODO Refatorar essa merda
           final loginController = Get.put(LoginController(LoginRepository(LoginApi())));
           final favouriteController = Get.put(FavouriteController(FavouriteRepository(FavouriteApi())));
-          favouriteController.getFavouritesByUser(loginController.login).listen((event) {
-            loginController.login.favourites = event;
-          });
+          favouriteController.getFavouritesByUser(loginController.login).listen((event) { });
 
           return Scaffold(
             appBar: PreferredSize(

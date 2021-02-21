@@ -15,4 +15,12 @@ class FavouriteRepository {
     return _favouriteApi.getFavouritesByUser(user);
   }
 
+  removeFavourites(String id, User user){
+    _favouriteApi.removeFavourites(id, user);
+  }
+
+  addFavourites(String id, int type, User user){
+    _favouriteApi.addFavourites(id, type, user);
+  }
+
 }
