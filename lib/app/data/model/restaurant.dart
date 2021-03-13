@@ -12,6 +12,7 @@ class Restaurant {
   final Address address;
   final String openingHour;
   final DocumentReference reference;
+  final GeoPoint geoPoint;
   final Map<String, dynamic> _socialMedia;
 
   List<SocialMedia> getAllSocialMedia() {
@@ -30,5 +31,6 @@ class Restaurant {
         openingHour = map['opening_hour'],
         sub = List.from(map['sub']),
         _socialMedia = map['social_media'],
+        geoPoint = map['geoLocation'],
         address = Address.fromMap(map);
 }

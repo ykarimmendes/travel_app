@@ -7,8 +7,9 @@ class IconPage extends StatelessWidget {
   final String text;
   Color iconColor;
   Color textColor;
+  VoidCallback voidCallback;
 
-  IconPage({@required this.text, @required this.icon, this.iconColor, this.textColor});
+  IconPage({@required this.text, @required this.icon, this.iconColor, this.textColor, this.voidCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class IconPage extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        Icon(
-          icon,
-          color: iconColor,
+        IconButton(
+          onPressed: voidCallback,
+          icon: Icon(icon, color: iconColor,),
         ),
         SizedBox(
           height: 15,

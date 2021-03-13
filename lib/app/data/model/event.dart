@@ -13,6 +13,7 @@ class Event {
   final String photoCoverThumb;
   final Address address;
   final String category;
+  final GeoPoint geoPoint;
   final DocumentReference reference;
 
   Event.fromSnapshot(DocumentSnapshot snapshot)
@@ -27,6 +28,7 @@ class Event {
         about = map['about'],
         photoCover = map['photo_cover'],
         photoCoverThumb = map['photo_cover_thumb'],
+        geoPoint = map['geoLocation'],
         address = Address.fromMap(map),
         priority = map['priority'];
 }

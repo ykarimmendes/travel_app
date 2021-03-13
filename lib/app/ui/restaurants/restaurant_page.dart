@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/app/data/model/collection_enum.dart';
 import 'package:travelapp/app/data/model/restaurant.dart';
+import 'package:travelapp/app/ui/favourite/favourite_widget.dart';
 import 'package:travelapp/app/ui/social_media/social_media_page.dart';
 import 'package:travelapp/app/ui/theme/utils.dart';
 import 'package:travelapp/app/ui/widgets/back_icon_page.dart';
@@ -12,9 +13,8 @@ import 'package:travelapp/app/ui/widgets/title_page_text.dart';
 import 'package:travelapp/app/ui/widgets/topic_text.dart';
 
 class RestaurantPage extends StatefulWidget {
-  final Restaurant _restaurant;
-
-  RestaurantPage(this._restaurant);
+  final Restaurant restaurant;
+  RestaurantPage(this.restaurant);
 
   @override
   _RestaurantPageState createState() => _RestaurantPageState();
@@ -23,7 +23,7 @@ class RestaurantPage extends StatefulWidget {
 class _RestaurantPageState extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
-    final Restaurant _restaurant = widget._restaurant;
+    final Restaurant _restaurant = widget.restaurant;
     return Scaffold(
       backgroundColor: Util.background,
       body: CustomScrollView(
@@ -54,7 +54,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                     descriptionLocation(_restaurant, context),
                     photosTextLocation("Fotos"),
                     PhotosPage(_restaurant.reference.id,
-                        describeEnum(CollectionEnum.business)),
+                       describeEnum(CollectionEnum.business)),
                   ],
                 ),
               ),
@@ -103,8 +103,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
   }
 
   nameLocation(Restaurant _restaurant) {
-    @override
-    Widget build(BuildContext context) {
+
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -134,20 +133,9 @@ class _RestaurantPageState extends State<RestaurantPage> {
             textAlign: TextAlign.justify,
             fontSize: 13,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                mainAttractionIcons("Favorito", Icons.favorite, null),
-                mainAttractionIcons("Mapa", Icons.map, null),
-                mainAttractionIcons("Compartilhar", Icons.share, null),
-              ],
-            ),
-          ),
+          FavouriteWidget(id: _restaurant.reference.id, type: 3, geoPoint: _restaurant.geoPoint,),
         ],
       );
-    }
   }
 
   locationName() {

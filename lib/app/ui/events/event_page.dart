@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/app/data/model/collection_enum.dart';
 import 'package:travelapp/app/data/model/event.dart';
+import 'package:travelapp/app/ui/favourite/favourite_widget.dart';
 import 'package:travelapp/app/ui/theme/utils.dart';
 import 'package:travelapp/app/ui/widgets/back_icon_page.dart';
 import 'package:travelapp/app/ui/widgets/custom_text.dart';
@@ -128,17 +129,7 @@ class NameLocation extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconPage(text: "Favorito", icon: Icons.favorite),
-              IconPage(text: "Mapa", icon: Icons.map),
-              IconPage(text: "Compartilhar", icon: Icons.share),
-            ],
-          ),
-        ),
+          FavouriteWidget(id: _event.reference.id, type:1, geoPoint: _event.geoPoint,),
       ],
     );
   }

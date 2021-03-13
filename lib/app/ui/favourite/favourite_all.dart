@@ -32,8 +32,8 @@ class FavouriteAll  extends GetView<HomeController> {
               GetX<FavouriteController>(
                 init: FavouriteController(FavouriteRepository(FavouriteApi())),
                 builder: (_) {
-                  if (_.favouritesList.length == 0) return LinearProgressIndicator();
-                  return buildListView(context, _.favouritesList);
+                  if (_.favouritesAttraction.length == 0) return LinearProgressIndicator();
+                  return buildListView(context, _.favouritesAttraction);
                 },
               ),
             ],

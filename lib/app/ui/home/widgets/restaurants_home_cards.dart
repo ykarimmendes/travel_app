@@ -38,7 +38,7 @@ Widget _buildListItem(BuildContext context, Restaurant restaurant) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => RestaurantPage(restaurant)),
+        MaterialPageRoute(builder: (context) => RestaurantPage(restaurant),)
       );
     },
     child: Card(
