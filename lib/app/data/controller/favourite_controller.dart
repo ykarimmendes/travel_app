@@ -29,7 +29,11 @@ class FavouriteController extends GetxController {
     isFavourite = val >= 0;
     return isFavourite;
   }
-
+  bool getIsFavourite2(String id) {
+    int val = _favouritesUser
+        .indexWhere((element) => element.id.toString() == id.toString());
+    return val >= 0;
+  }
   removeFavourites(String id, User user) {
     _repository.removeFavourites(id, user);
   }

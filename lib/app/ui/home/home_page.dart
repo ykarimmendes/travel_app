@@ -19,7 +19,7 @@ class HomePage extends  StatelessWidget {
 
     return GetX<HomeController>(
       init: HomeController(HomeRepository(HomeApi())),
-        builder: (_){
+      builder: (_){
         //TODO Refatorar essa merda
           final loginController = Get.put(LoginController(LoginRepository(LoginApi())));
           final favouriteController = Get.put(FavouriteController(FavouriteRepository(FavouriteApi())));

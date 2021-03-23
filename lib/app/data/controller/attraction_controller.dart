@@ -17,7 +17,9 @@ class AttractionController extends GetxController {
     _repository.getAll().listen((data) {
         data.docs.asMap().forEach((index, data) {
           Attraction att = Attraction.fromSnapshot(data);
-          _attractionsList.add(att);
+          bool isRepeated = _attractionsList.where((x) => x.reference.id == data.reference.id).toList().length > 0;
+          if (isRepeated == false)
+            _attractionsList.add(att);
         });
     });
   }
