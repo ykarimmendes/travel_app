@@ -117,7 +117,7 @@ class _MapPageState extends State<MapPage> {
                         _.click(index);
 
                         if (_.mapAppList[index].isMapClicked == false){
-                          _.removeMarker(index);
+                          _.markers.removeWhere((element) => element.markerId == _.mapAppList[index].title);
                         }
                         //_handleTap(index);
                       },
