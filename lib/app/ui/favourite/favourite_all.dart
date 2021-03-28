@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/controller/favourite_controller.dart';
 import 'package:travelapp/app/data/controller/home_controller.dart';
+import 'package:travelapp/app/data/controller/login_controller.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/provider/favourite_api.dart';
 import 'package:travelapp/app/data/repository/favourite_repository.dart';
 import 'package:travelapp/app/ui/atracctions/attraction_page.dart';
+import 'package:travelapp/app/ui/widgets/title_text.dart';
 
-class FavouriteAll  extends GetView<HomeController> {
+class FavouriteAll extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    //final _userController = Get.find<LoginController>();
+    final _userController = Get.find<LoginController>();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -27,24 +29,32 @@ class FavouriteAll  extends GetView<HomeController> {
         padding: EdgeInsets.only(left: 10, right: 10, top: 5),
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              GetX<FavouriteController>(
-                init: FavouriteController(FavouriteRepository(FavouriteApi())),
-                builder: (_) {
-                  if (_.favouritesAttraction.length == 0) return LinearProgressIndicator();
-                  return buildListView(context, _.favouritesAttraction);
-                },
-              ),
-            ],
+          child: GetX<FavouriteController>(
+            init: FavouriteController(FavouriteRepository(FavouriteApi())),
+            initState: (state) {
+              Get.find<FavouriteController>()
+                  .getFavouritesByUser(_userController.login);
+            },
+            builder: (_) {
+              if (_.favouritesAttraction.length == 0)
+                return LinearProgressIndicator();
+
+              return Column(
+                  children: [
+                    TitleText(
+                      text: "Meus Eventos Favoritos",
+                      renderMore: false,
+                      top: 0,
+                    ),
+                    buildListView(context, _.favouritesAttraction)]);
+            },
           ),
         ),
       ),
     );
   }
 
-  ListView buildListView(
-      BuildContext context, List<Attraction> atts) {
+  ListView buildListView(BuildContext context, List<Attraction> atts) {
     return ListView(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -146,6 +156,4 @@ class StatsLocation extends StatelessWidget {
       ],
     );
   }
-
-
 }

@@ -44,10 +44,6 @@ class HomePage extends  StatelessWidget {
                   icon: Icon(Icons.favorite),
                   title: Text('Favoritos'),
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.map),
-                  title: Text('Rotas Inteligentes'),
-                ),
               ],
               selectedItemColor: Colors.amber[800],
             ),

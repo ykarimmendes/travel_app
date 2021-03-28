@@ -6,6 +6,7 @@ class MapApp {
 
   String title;
   GeoPoint geoPoint;
+  int valueColor;
   DocumentReference reference;
 
   final _isMapClicked = false.obs;
@@ -16,8 +17,9 @@ class MapApp {
   get isFavourite => this._isFavourite.value;
   set isFavourite(value) => this._isFavourite.value = value;
 
-  MapApp(String _title, GeoPoint _geoPoint, DocumentReference _reference)
+  MapApp(String _title, GeoPoint _geoPoint,int _valueColor, DocumentReference _reference)
       : title = _title,
         geoPoint = _geoPoint,
+        valueColor = _valueColor,
         reference = _reference;
 }

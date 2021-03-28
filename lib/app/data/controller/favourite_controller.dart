@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/model/event.dart';
+import 'package:travelapp/app/data/model/restaurant.dart';
 import 'package:travelapp/app/data/model/user/favourite.dart';
 import 'package:travelapp/app/data/model/user/user.dart';
 import 'package:travelapp/app/data/repository/favourite_repository.dart';
@@ -16,8 +17,13 @@ class FavouriteController extends GetxController {
   final _favouritesEvent = List<Event>().obs;
   get favouritesEvent => this._favouritesEvent;
 
+  final _favouritesRestaurant = List<Restaurant>().obs;
+  get favouritesRestaurant => this._favouritesRestaurant;
+
   final _favouritesUser = List<Favourite>().obs;
   get favouritesUser => this._favouritesUser;
+
+
 
   final _isFavourite = false.obs;
   get isFavourite => this._isFavourite.value;
@@ -62,20 +68,14 @@ class FavouriteController extends GetxController {
       (element) {
         _repository.get(element.id).listen(
           (data) {
-            int valDel = _favouritesAttraction.indexWhere(
-                (element) => element.reference.id == data.reference.id);
-            if (valDel >= 0) {
-              if (element.type == 2) {
-                Attraction att = Attraction.fromSnapshot(data);
-                att.isFavourite = favouritesUser
-                    .any((element) => element.id == att.reference.id);
-                _favouritesAttraction.removeAt(valDel);
-                _favouritesAttraction.insert(valDel, att);
-              } else if (element.type == 2) {
+            if (element.type == 1) {
+              _favouritesEvent.add(Event.fromSnapshot(data));
+            }else if (element.type == 2) {
                 _favouritesAttraction.add(Attraction.fromSnapshot(data));
-              }
+            }else if (element.type == 3) {
+              _favouritesRestaurant.add(Restaurant.fromSnapshot(data));
             }
-          },
+            },
         );
       },
     );

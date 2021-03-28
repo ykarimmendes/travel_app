@@ -41,6 +41,7 @@ class _MapPageState extends State<MapPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: BackIconPage(),
+          title: Text(widget.description, style: TextStyle(color: Colors.black),),centerTitle: true,
         ),
         body: GetX<MapController>(
             init: MapController(),
@@ -54,13 +55,18 @@ class _MapPageState extends State<MapPage> {
                   children: [
                     Expanded(
                       flex: 6,
-                      child: GoogleMap(
-                        markers: _.createMarker(_.mapAppList),
-                        onMapCreated: _onMapCreated,
-                        initialCameraPosition: CameraPosition(
-                            target:
-                                LatLng(widget.geoPoint.latitude, widget.geoPoint.longitude),
-                            zoom: 12),
+                      child: GetBuilder(
+                        init: MapController(),
+                        builder: (controller) {
+                          return GoogleMap(
+                            markers: _.createAllMarkers(_.mapAppList, widget.description,favouriteController.favouritesUser),
+                            onMapCreated: _onMapCreated,
+                            initialCameraPosition: CameraPosition(
+                                target: LatLng(widget.geoPoint.latitude,
+                                    widget.geoPoint.longitude),
+                                zoom: 12),
+                          );
+                        },
                       ),
                     ),
                     Expanded(
@@ -86,20 +92,21 @@ class _MapPageState extends State<MapPage> {
 
   Padding buildLocations(MapController _, int index, bool fav) {
     _.mapAppList[index].isMapClicked = fav;
+    final mController = Get.put(MapController());
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             Expanded(
-                flex: 10,
-                child:
-                Obx(() => Icon(
-                  Icons.location_on,
-                  color: _.mapAppList[index].isMapClicked ? Util.colors[index] : Colors.grey,
-                  size: 30,
-                )),
-
-                ),
+              flex: 10,
+              child: Obx(() => Icon(
+                    Icons.location_on,
+                    color: _.mapAppList[index].isMapClicked
+                        ? Util.colors[index]
+                        : Colors.grey,
+                    size: 30,
+                  )),
+            ),
             Expanded(
                 flex: 60,
                 child: Text(
@@ -111,14 +118,12 @@ class _MapPageState extends State<MapPage> {
                       icon: Icon(_.mapAppList[index].isMapClicked
                           ? Icons.check_box
                           : Icons.check_box_outline_blank_sharp),
-                      color: _.mapAppList[index].isMapClicked ?Util.colors[index] : Colors.grey,
+                      color: _.mapAppList[index].isMapClicked
+                          ? Util.colors[index]
+                          : Colors.grey,
                       onPressed: () {
-
                         _.click(index);
-
-                        if (_.mapAppList[index].isMapClicked == false){
-                          _.markers.removeWhere((element) => element.markerId == _.mapAppList[index].title);
-                        }
+                        mController.update();
                         //_handleTap(index);
                       },
                     ))),
