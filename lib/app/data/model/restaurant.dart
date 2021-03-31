@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travelapp/app/data/model/social_media.dart';
 
+import 'Local.dart';
 import 'address.dart';
 
-class Restaurant {
-  final String title;
+class Restaurant extends Local {
+
   final String category;
   final String image;
   final String about;
   final List<String> sub;
   final Address address;
   final String openingHour;
-  final DocumentReference reference;
   final GeoPoint geoPoint;
   final Map<String, dynamic> _socialMedia;
 
@@ -21,10 +21,10 @@ class Restaurant {
   }
 
   Restaurant.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data(), reference: snapshot.reference);
+      : this.fromMap(snapshot.data(), snapshot.reference);
 
-  Restaurant.fromMap(Map<String, dynamic> map, {this.reference})
-      : title = map['title'],
+  Restaurant.fromMap(Map<String, dynamic> map, DocumentReference reference)
+      :
         about = map['about'],
         category = map['category'],
         image = map['image'],
@@ -32,5 +32,6 @@ class Restaurant {
         sub = List.from(map['sub']),
         _socialMedia = map['social_media'],
         geoPoint = map['geoLocation'],
-        address = Address.fromMap(map);
+        address = Address.fromMap(map),
+        super.fromMap(map, reference: reference);
 }

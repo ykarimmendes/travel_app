@@ -1,32 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:travelapp/app/data/model/Local.dart';
 
-class Attraction {
-  final String title;
-  final String resume;
+class Attraction  extends Local{
+
   final int top;
   final String topImage;
   final String about;
-  final String photoCover;
-  final String photoCoverThumb;
   final String category;
   final GeoPoint geoPoint;
   bool isFavourite = false;
-  DocumentReference reference;
-
-
-
 
   Attraction.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data(), reference: snapshot.reference);
+      : this.fromMap(snapshot.data(), snapshot.reference);
 
-  Attraction.fromMap(Map<String, dynamic> map, {this.reference})
-      : title = map['title'],
-        category = map['category'],
-        resume = map['resume'],
+  Attraction.fromMap(Map<String, dynamic> map, DocumentReference reference)
+      : category = map['category'],
         top = map['top'],
-        photoCover = map['photo_cover'],
-        photoCoverThumb = map['photo_cover_thumb'],
         about = map['about'],
         geoPoint = map['geoLocation'],
-        topImage = map['top_image'];
+        topImage = map['top_image'], super.fromMap(map,reference: reference);
 }

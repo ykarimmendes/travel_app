@@ -58,7 +58,7 @@ class EventsHomeCard extends GetView<EventController> {
                           CardTitle(_.eventsList[0].title),
                           SizedBox(height: 8),
                           Text(
-                            _.eventsList[0].smallDescription,
+                            _.eventsList[0].title,
                             style: TextStyle(
                               color: Colors.red,
                               fontWeight: FontWeight.w500,
@@ -67,7 +67,7 @@ class EventsHomeCard extends GetView<EventController> {
                           SizedBox(height: 4),
                           Flexible(
                             child: CardText(
-                              _.eventsList[0].description,
+                              _.eventsList[0].resume,
                             ),
                           )
                         ],
