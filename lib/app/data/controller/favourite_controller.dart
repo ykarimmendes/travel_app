@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:travelapp/app/data/model/Local.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/model/event.dart';
 import 'package:travelapp/app/data/model/restaurant.dart';
@@ -9,24 +10,21 @@ import 'package:travelapp/app/data/repository/favourite_repository.dart';
 class FavouriteController extends GetxController {
   final FavouriteRepository _repository;
   User _user;
+
   FavouriteController(this._repository);
 
-  final _favouritesAttraction = List<Attraction>().obs;
-  get favouritesAttraction => this._favouritesAttraction;
+  final _favouritesLocal = List<Local>().obs;
 
-  final _favouritesEvent = List<Event>().obs;
-  get favouritesEvent => this._favouritesEvent;
-
-  final _favouritesRestaurant = List<Restaurant>().obs;
-  get favouritesRestaurant => this._favouritesRestaurant;
+  get favouritesLocal => this._favouritesLocal;
 
   final _favouritesUser = List<Favourite>().obs;
+
   get favouritesUser => this._favouritesUser;
 
-
-
   final _isFavourite = false.obs;
+
   get isFavourite => this._isFavourite.value;
+
   set isFavourite(value) => this._isFavourite.value = value;
 
   bool getIsFavourite(String id) {
@@ -35,11 +33,13 @@ class FavouriteController extends GetxController {
     isFavourite = val >= 0;
     return isFavourite;
   }
+
   bool getIsFavourite2(String id) {
     int val = _favouritesUser
         .indexWhere((element) => element.id.toString() == id.toString());
     return val >= 0;
   }
+
   removeFavourites(String id, User user) {
     _repository.removeFavourites(id, user);
   }
@@ -52,7 +52,7 @@ class FavouriteController extends GetxController {
     _user = user;
     _repository.getFavouritesByUser(user).listen((event) {
       favouritesUser.clear();
-      _favouritesAttraction.clear();
+      _favouritesLocal.clear();
       event.docs.forEach((e) {
         Favourite fav =
             new Favourite.fromNew(e.get('id').toString().trim(), e.get('type'));
@@ -68,14 +68,19 @@ class FavouriteController extends GetxController {
       (element) {
         _repository.get(element.id).listen(
           (data) {
-            if (element.type == 1) {
-              _favouritesEvent.add(Event.fromSnapshot(data));
-            }else if (element.type == 2) {
-                _favouritesAttraction.add(Attraction.fromSnapshot(data));
-            }else if (element.type == 3) {
-              _favouritesRestaurant.add(Restaurant.fromSnapshot(data));
+            if (element.type == 2) {
+              favouritesLocal.add(Local.fromSnapshot(data));
             }
-            },
+            /*
+            if (element.type == 1) {
+              favouritesLocal.add(Local.fromSnapshot(data));
+            } else if (element.type == 2) {
+              favouritesLocal.add(Local.fromSnapshot(data));
+            } else if (element.type == 3) {
+              favouritesLocal.add(Local.fromSnapshot(data));
+            }
+             */
+          },
         );
       },
     );

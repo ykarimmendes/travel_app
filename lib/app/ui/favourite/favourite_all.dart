@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:travelapp/app/data/controller/favourite_controller.dart';
 import 'package:travelapp/app/data/controller/home_controller.dart';
 import 'package:travelapp/app/data/controller/login_controller.dart';
+import 'package:travelapp/app/data/model/Local.dart';
 import 'package:travelapp/app/data/model/attraction.dart';
 import 'package:travelapp/app/data/provider/favourite_api.dart';
 import 'package:travelapp/app/data/repository/favourite_repository.dart';
@@ -36,7 +37,7 @@ class FavouriteAll extends GetView<HomeController> {
                   .getFavouritesByUser(_userController.login);
             },
             builder: (_) {
-              if (_.favouritesAttraction.length == 0)
+              if (_.favouritesLocal.length == 0)
                 return LinearProgressIndicator();
 
               return Column(
@@ -46,7 +47,7 @@ class FavouriteAll extends GetView<HomeController> {
                       renderMore: false,
                       top: 0,
                     ),
-                    buildListView(context, _.favouritesAttraction)]);
+                    buildListView(context, _.favouritesLocal)]);
             },
           ),
         ),
@@ -54,7 +55,7 @@ class FavouriteAll extends GetView<HomeController> {
     );
   }
 
-  ListView buildListView(BuildContext context, List<Attraction> atts) {
+  ListView buildListView(BuildContext context, List<Local> atts) {
     return ListView(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -62,7 +63,7 @@ class FavouriteAll extends GetView<HomeController> {
     );
   }
 
-  SizedBox _buildSizedBox(BuildContext context, Attraction att) {
+  SizedBox _buildSizedBox(BuildContext context, Local att) {
     return SizedBox(
       height: 135,
       child: GestureDetector(
