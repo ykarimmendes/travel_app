@@ -35,8 +35,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
             forceElevated: true,
             floating: false,
             expandedHeight: MediaQuery.of(context).size.height / 3,
-            flexibleSpace: Image.asset(
-              "assets/restaurante1.jpg",
+            flexibleSpace: Image.network(
+              _restaurant.photoCover,
               fit: BoxFit.cover,
             ),
           ),

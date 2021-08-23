@@ -7,7 +7,6 @@ import 'address.dart';
 class Restaurant extends Local {
 
   final String category;
-  final String image;
   final String about;
   final List<String> sub;
   final Address address;
@@ -27,7 +26,6 @@ class Restaurant extends Local {
       :
         about = map['about'],
         category = map['category'],
-        image = map['image'],
         openingHour = map['opening_hour'],
         sub = List.from(map['sub']),
         _socialMedia = map['social_media'],

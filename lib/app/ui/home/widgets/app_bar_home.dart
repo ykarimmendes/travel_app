@@ -7,6 +7,7 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return AppBar(
+
       backgroundColor: Util.background,
       flexibleSpace: GestureDetector(
         onTap: (){

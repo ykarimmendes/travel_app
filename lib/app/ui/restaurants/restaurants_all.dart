@@ -76,7 +76,7 @@ class RestaurantAll  extends GetView<RestaurantController> {
                       child: Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Image.network(
-                          restaurant.image,
+                          restaurant.photoCoverThumb,
                           fit: BoxFit.cover,
                           width: 150,
                         ),

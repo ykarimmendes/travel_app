@@ -56,8 +56,8 @@ Widget _buildListItem(BuildContext context, Restaurant restaurant) {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   elevation: 2,
-                  child: Image.asset(
-                    "assets/${restaurant.image}",
+                  child: Image.network(
+                    restaurant.photoCover,
                     height: 100,
                     fit: BoxFit.cover,
                   ),

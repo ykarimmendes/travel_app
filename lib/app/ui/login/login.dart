@@ -17,30 +17,14 @@ class Login extends GetView<LoginController> {
     return Scaffold(
       body: Center(
         child: Container(
-          /*
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  alignment: Alignment(0,0),
-                  image: AssetImage("assets/home/home_blu2.jpg"), fit: BoxFit.cover),),
-
-           */
           color: Colors.grey[200],
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                flex: 20,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Login ou crie sua conta",
-                      style: TextStyle(fontSize: 17, color: Colors.black),
-                    ),
-                  ],
-                ),
+                flex: 40,
+                child: Image.asset("assets/logo.png"),
               ),
               Expanded(
                 flex: 40,
@@ -58,7 +42,6 @@ class Login extends GetView<LoginController> {
                       width: MediaQuery.of(context).size.width,
                       height: 100,
                       child: RaisedButton(
-
                         onPressed: () async {
                           await c.get();
                           Navigator.push(
@@ -91,7 +74,7 @@ class Login extends GetView<LoginController> {
                 children: [],
               ),
               Expanded(
-                flex: 40,
+                flex: 30,
                 child: Container(
                   color: Colors.transparent,
                   child: Column(
